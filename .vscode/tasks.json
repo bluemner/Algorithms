@@ -11,8 +11,7 @@
             "showOutput": "always",
             // No args
             "args": [
-                "all",
-                "thread"
+                "all"
                 ],
             // Use the standard less compilation problem matcher.
             "problemMatcher": {
