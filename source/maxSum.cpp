@@ -28,7 +28,7 @@ namespace betacore
 		}  
 	}
 	template <size_t rows, size_t cols>  
-	void find_max_sum(int (&inp) [rows][cols] )  
+	void find_max_sum(int (&input) [rows][cols] )  
 	{  
 		int temp[cols], n, x1, x2;  
 		int current_sum, max_sum, fx1, fx2, fy1, fy2;  
