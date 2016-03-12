@@ -26,6 +26,17 @@ namespace betacore
 		}
 	}
 	
+	// A utility function to print the constructed distance array
+	void dijkstra::printSolution(bool dist[], int size)
+	{
+		std::cout << "Path Source:" << std::endl;
+		for (int i = 0; i < size; i++){
+			bool mx =dist[i];
+			if(mx)
+			std::cout << i <<"\t"<< mx << std::endl;
+		}
+	}
+	
   	//Scan function to find min value
 	int dijkstra::minDistance(int dist[], bool sptSet[], int size)
 	{
@@ -88,8 +99,8 @@ namespace betacore
 	
 		int i , u;
 		int dist[rows];
-		bool spt[rows];
-		
+		bool spt[rows];		
+	
 		//INI
 		for (i = 0; i < rows; i++)
 		{
@@ -108,8 +119,10 @@ namespace betacore
 				if( !spt[v] && graph[u][v] && dist[u] != std::numeric_limits<int>::max() &&
 					dist[u] + graph[u][v] < dist[v] ){
 						dist[v] = dist[u] + graph[u][v];
+						
 						if(v ==target){
 							printSolution(dist, rows);
+							printSolution(spt, rows);
 							return;
 						}
 					}

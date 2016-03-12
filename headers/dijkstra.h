@@ -8,6 +8,7 @@ namespace betacore
 		private:
 			void iniGraph(); 
 			void printSolution(int dist[], int size);
+			void printSolution(bool dist[], int size);
 			int minDistance(int dist[], bool sptSet[], int size);
 		public: 
 			dijkstra();
