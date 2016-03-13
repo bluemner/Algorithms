@@ -37,6 +37,32 @@ namespace betacore
 		}
 	}
 	
+	template <size_t rows, size_t cols>
+	void dijkstra::printArray(int (&graph) [rows][cols]){
+		for( int i = 0 ; i < rows; i++ ){
+			for ( int j = 0 ; j < cols; j++ ){
+				//if(graph[i][j]){
+			//			std::cout << i << " -> "<< j << std::endl;
+			//	}
+			 	std::cout << graph[i][j] << "\t";
+			}			
+			std::cout << "" << std::endl;
+		}
+	}
+	
+	template <size_t rows, size_t cols>
+	void dijkstra::printArray(bool (&graph) [rows][cols]){
+		for( int i = 0 ; i < rows; i++ ){
+			for ( int j = 0 ; j < cols; j++ ){
+				//if(graph[i][j]){
+			//			std::cout << i << " -> "<< j << std::endl;
+			//	}
+			 	std::cout << graph[i][j] << "\t";
+			}			
+			std::cout << "" << std::endl;
+		}
+	}
+	
   	//Scan function to find min value
 	int dijkstra::minDistance(int dist[], bool sptSet[], int size)
 	{
@@ -93,19 +119,26 @@ namespace betacore
 			printSolution(dist, rows);
 	}//method
 	
-	  template <size_t rows, size_t cols>  
+	template <size_t rows, size_t cols>  
 	void dijkstra::runAlogrithm ( int (&graph) [rows][cols], int source, int target)
 	{
 	
-		int i , u;
+		int i, j, u;
 		int dist[rows];
+		int prev[rows];
 		bool spt[rows];		
-	
+		//bool shrtpath[rows][cols];
+		int parent[rows];
 		//INI
 		for (i = 0; i < rows; i++)
 		{
 			dist[i] = std::numeric_limits<int>::max();;
 			spt[i] = false; //allows us to mark visted 
+			prev[i] = 0;
+			parent[i] = 0;
+		//	for( j = 0 ; j< cols; j++ ){
+		//		shrtpath[i][j] = false;
+		//	}
 		}
 		dist[source]=0; //dist from source will always be zero;
 		
@@ -113,18 +146,41 @@ namespace betacore
 		{
 			u = minDistance(dist, spt, rows);
 			spt[u] = true; //we visted the path;
+		    if(u ==target){
+				
+				//1  S ← empty sequence
+				//2  u ← target
+				//3  while prev[u] is defined:                  // Construct the shortest path with a stack S
+				//4      insert u at the beginning of S         // Push the vertex onto the stack
+				//5      u ← prev[u]                            // Traverse from target to source
+				//6  insert u at the beginning of S             // Push the source onto the stack
+	
+			  //printSolution(dist, rows);
+			  //printArray(shrtpath);
+			  int parentIndex=0;
+			  while(prev[u]){
+				   parent[parentIndex++]=u;
+				   u = prev[u];
+			  }
+			  parent[parentIndex]=u;
+			 
+			  std::cout << "Shortest path Length:"<< dist[target] << std::endl; 
+			  std::cout << 0;
+			  for(int x = parentIndex; x >=0; x--){
+				  std::cout << " -> " << parent[x] ;
+			  } 
+			  std::cout <<std::endl;
+			  return;
+			}
 			
 			//distance vertex 
 			for ( int v = 0; v < rows ; v++ ){
 				if( !spt[v] && graph[u][v] && dist[u] != std::numeric_limits<int>::max() &&
 					dist[u] + graph[u][v] < dist[v] ){
 						dist[v] = dist[u] + graph[u][v];
+						prev[v] =u;
+						//parent[v] = 1;
 						
-						if(v ==target){
-							printSolution(dist, rows);
-							printSolution(spt, rows);
-							return;
-						}
 					}
 					
 					
@@ -191,5 +247,10 @@ int main ( int argc, char ** argv )
 					{8, 11, 0, 0, 0, 0, 1, 0, 7},
 					{0, 0, 2, 0, 0, 0, 6, 7, 0}
 					};
-	d.runAlogrithm(gg, 0, 5);
+	d.printArray(gg);
+	d.runAlogrithm(gg, 0);
+	for(int i=0; i< 9; i++){
+			d.runAlogrithm(gg, 0, i);
+	}				
+
 }//main

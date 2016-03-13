@@ -21,6 +21,11 @@ namespace betacore
 			template <size_t rows, size_t cols>  
 			void runAlogrithm ( int (&graph) [rows][cols], int source, int target);  
 	
+			template <size_t rows, size_t cols>
+			void printArray(bool (&graph) [rows][cols]);
+			
+			template <size_t rows, size_t cols>
+			void printArray(int (&graph) [rows][cols]);
 	};
 }
 #endif
