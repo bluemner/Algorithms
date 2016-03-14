@@ -110,9 +110,7 @@ namespace betacore
 				if( !spt[v] && graph[u][v] && dist[u] != std::numeric_limits<int>::max() &&
 					dist[u] + graph[u][v] < dist[v] ){
 						dist[v] = dist[u] + graph[u][v];
-					}
-					
-					
+					}	
 			}
 		
 		}
@@ -180,10 +178,7 @@ namespace betacore
 						dist[v] = dist[u] + graph[u][v];
 						prev[v] =u;
 						//parent[v] = 1;
-						
-					}
-					
-					
+					}			
 			}
 		
 		}
