@@ -52,7 +52,11 @@ namespace betacore
 	   
 	   return NULL;
    }
-   
+
+   edge* graph::getEdge( int index )
+   {
+	 return edges.at( index );   
+   }
    void graph::printEdges()
    {
 		int i;
@@ -85,7 +89,29 @@ namespace betacore
 		}
 	}
 
+	
+	int graph::getEdgeCount(){
+		edges.size();
+	}
+	
+	int graph::getNodeCount(){
+		nodes.size();
+	}
+	int graph::pathLength( int u, int v)
+	{
+		for ( int i = 0; i < edges.size(); i++ )
+		{
+			edge* temp = edges.at(i);
+			if(temp->source == u && temp->target ==v)
+			{
+				return temp-> cost;
+			}
+			  
+		}
+		return edges.at(u)->cost;
+	}
 }
+
 int main2( int argc, char ** argv )
 {
 	betacore::graph G;
@@ -96,7 +122,7 @@ int main2( int argc, char ** argv )
 	G.addNode(11, "D");
 	
 	betacore::node *n;
-	if( ( n = G.getNode(0) ) != NULL)
+	if( ( n = G.getNode(0) ) != NULL )
 	{
 			std::cout << "[" << n->id << " , " << n->value << " , " << *(n->name) << "]" << std::endl;
 	}

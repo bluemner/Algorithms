@@ -42,8 +42,12 @@ namespace betacore
 			void printEdges();
 			
 			node* getNode(int id);
-					
-					
+			edge* getEdge(int index );
+			
+			
+			int getEdgeCount();
+			int getNodeCount();
+			int pathLength( int u, int v);
 	};	
 }
 #endif

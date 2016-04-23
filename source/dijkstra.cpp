@@ -84,35 +84,67 @@ namespace betacore
 	void dijkstra::iniGraph(){
 		
 	}
-	
-	
+
+/*
+Wiki dijkstra psudue code 
+ 1  function Dijkstra(Graph, source):
+ 2
+ 3      create vertex set Q
+ 4
+ 5      for each vertex v in Graph:             // Initialization
+ 6          dist[v] ← INFINITY                  // Unknown distance from source to v
+ 7          prev[v] ← UNDEFINED                 // Previous node in optimal path from source
+ 8          add v to Q                          // All nodes initially in Q (unvisited nodes)
+ 9
+10      dist[source] ← 0                        // Distance from source to source
+11      
+12      while Q is not empty:
+13          u ← vertex in Q with min dist[u]    // Source node will be selected first
+14          remove u from Q 
+15          
+16          for each neighbor v of u:           // where v is still in Q.
+17              alt ← dist[u] + length(u, v)
+18              if alt < dist[v]:               // A shorter path to v has been found
+19                  dist[v] ← alt 
+20                  prev[v] ← u 
+21
+22      return dist[], prev[]
+*/
 	void dijkstra::runAlogrithm( graph *G, node *source ){
-		int i , u;
+		
+		int i, u;
+		std::vector<edge*> Q;
+		int rows = G->getEdgeCount();
 		int dist[rows];
+		int prev[rows];
 		bool spt[rows];
 		
-		//INI
-		for (i = 0; i < rows; i++)
-		{
+		for(i = 0; i < rows; ++i){
 			dist[i] = std::numeric_limits<int>::max();;
-			spt[i] = false; //allows us to mark visted 
+		 	spt[i] = false; //allows us to mark visted 
+			prev[i] = 0;
+			Q.push_back(G -> getEdge(i));
 		}
-		dist[source]=0; //dist from source will always be zero;
-		
-		for( int count = 0; count < rows; count++ )
+		while ( Q.size() > 0)
 		{
 			u = minDistance(dist, spt, rows);
-			spt[u] = true; //we visted the path;
+			spt[u] = true; //we visted the path
+	
 			
-			for ( int v = 0; v < rows ; v++ ){
-				if( !spt[v] && graph[u][v] && dist[u] != std::numeric_limits<int>::max() &&
-					dist[u] + graph[u][v] < dist[v] ){
-						dist[v] = dist[u] + graph[u][v];
+			Q.erase(Q.begin() + u);
+			for ( int v = 0 ; v < rows ; ++v )
+			{
+				int pathLen =  G->pathLength(u,v);
+				int alt = dist[u] + pathLen;
+				
+				std::cout << "Alt:" << alt <<std::endl;
+				if( G->pathLength(u,v) && alt < dist[v] ){
+						dist[v] = alt;
+						prev[v] = u;
 					}	
 			}
-		
 		}
-			printSolution(dist, rows);
+		printSolution(dist, rows);
 	}//method
 	
     template <size_t rows, size_t cols>  
@@ -265,9 +297,13 @@ int main ( int argc, char ** argv )
 	G.printNodes();
 	G.printEdges();
 	
+	//G.runAlogrithm(G,G.getNode(0));
 	betacore::dijkstra  d;
-	//d.runAlogrithm(G,G.getNode(0));
+	betacore::node* source = G.getNode(0);
+	std::cout << "Running List Graph" <<std::endl;
+	d.runAlogrithm(&G, source);
 	
+	std::cout << "Running Matrix Graph" <<std::endl;
 	int gg[9][9] = {
 		            {0, 4, 0, 0, 0, 0, 0, 8, 0},
 					{4, 0, 8, 0, 0, 0, 0, 11, 0},
