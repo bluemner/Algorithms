@@ -3,7 +3,7 @@
 
 namespace betacore
 {
-	void kadane(int input[], int n, int &x1, int &x2, int &max)  
+	void kadane( int input[], int n, int &x1, int &x2, int &max )  
 	{  
 		int current_sum, i;  
 		max = 0;  
@@ -14,13 +14,13 @@ namespace betacore
 		for( int i = 0; i < n; i++ )  
 		{  
 			current_sum = current_sum + input[i];  
-			if(max < current_sum)  
+			if( max < current_sum )  
 			{  
 				max = current_sum;  
 				x2 = i;  
 				x1 = lx1;  
 			}  
-			if (current_sum < 0)  
+			if ( current_sum < 0 )  
 			{  
 				current_sum = 0;  
 				lx1 = i + 1;  
@@ -37,7 +37,7 @@ namespace betacore
 		fx1 = fx2 = fy1 = fy2 = max_sum = current_sum = -1;  
 	
 		for ( i = 0; i < rows; i++ )  
-		{  
+		{  	//zeroing out the information
 			for( k = 0 ; k < cols; k++ )
 			{  
 				temp[k] = 0;  
@@ -64,6 +64,9 @@ namespace betacore
 	}  
 }
 
+// ===================================
+// Main method to run max_sum instance 
+// ===================================
 int main ( int argc, char ** argv )
 {
 	//        X  Y

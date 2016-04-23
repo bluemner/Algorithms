@@ -2,10 +2,38 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Debug",
+			"name": "Dijkstra",
 			"type": "gdb",
 			"request": "launch",
 			"target": "./bin/dijkstra.o",
+			"cwd": "${workspaceRoot}"
+		},
+		{
+			"name": "Graph",
+			"type": "gdb",
+			"request": "launch",
+			"target": "./bin/graph.o",
+			"cwd": "${workspaceRoot}"
+		},
+		{
+			"name": "MaxSum",
+			"type": "gdb",
+			"request": "launch",
+			"target": "./bin/maxSum.o",
+			"cwd": "${workspaceRoot}"
+		},
+		{
+			"name": "Test1",
+			"type": "gdb",
+			"request": "launch",
+			"target": "./bin/test1.o",
+			"cwd": "${workspaceRoot}"
+		},
+		{
+			"name": "Main",
+			"type": "gdb",
+			"request": "launch",
+			"target": "./bin/run.o",
 			"cwd": "${workspaceRoot}"
 		}
 	]

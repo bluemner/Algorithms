@@ -17,7 +17,7 @@ namespace betacore
 
 	int majorVersion ()
 	{
-		return 0;
+		return 0;	
 	}
 	
 	int minorVersion ()

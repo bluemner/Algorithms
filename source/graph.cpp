@@ -2,14 +2,22 @@
 #include <string>
 #include <vector>
 #include "../headers/graph.h"
-
+//#include "../headers/dijkstra.h"
 namespace betacore
 {
    graph::graph()
    {
+	   this->mode = adjacentLists;
 	   this->nodeIdCount = 0 ;
    }
    
+   template <size_t rows, size_t cols> 
+   graph::graph( int (&graph)[rows][cols] ){
+	   this->nodeIdCount = 0;
+	   this->mode = NULL;
+	   this->_graph = &graph;
+   }  
+     
    void graph::addNode( int value, std::string name )
    {
 	   node *n = new node;
@@ -78,7 +86,7 @@ namespace betacore
 	}
 
 }
-int mainx ( int argc, char ** argv )
+int main2( int argc, char ** argv )
 {
 	betacore::graph G;
     
@@ -93,10 +101,18 @@ int mainx ( int argc, char ** argv )
 			std::cout << "[" << n->id << " , " << n->value << " , " << *(n->name) << "]" << std::endl;
 	}
 	
+	// A -> B
 	G.addEdge(0,1,1);
-	G.addEdge(0,2,1);
-	G.addEdge(0,3,1);
-	//G.addEdge(0,4);
+	// A -> C
+	G.addEdge(0,2,4);
+	// A -> D
+	G.addEdge(0,3,2);
+	
+	// B -> C
+	G.addEdge(1,2,3);
+	
+	// D -> C
+	G.addEdge(3,2,1);
 	
 	G.printNodes();
 	G.printEdges();
