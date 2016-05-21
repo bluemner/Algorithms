@@ -5,13 +5,14 @@ namespace betacore
 {
 	void kadane( int input[], int n, int &x1, int &x2, int &max )  
 	{  
-		int current_sum, i;  
+		int current_sum,
+		    i;  
 		max = 0;  
 		current_sum = 0;  
 		x1 = x2 = 0;  
 		int lx1, lx2;  
 		lx1 = 0;  
-		for( int i = 0; i < n; i++ )  
+		for( i = 0; i < n; i++ )  
 		{  
 			current_sum = current_sum + input[i];  
 			if( max < current_sum )  

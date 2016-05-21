@@ -120,7 +120,7 @@ Wiki dijkstra psudue code
 		bool spt[rows];
 		
 		for(i = 0; i < rows; ++i){
-			dist[i] = std::numeric_limits<int>::max();;
+			dist[i] = std::numeric_limits<int>::max();
 		 	spt[i] = false; //allows us to mark visted 
 			prev[i] = 0;
 			Q.push_back(G -> getEdge(i));
@@ -192,7 +192,7 @@ Wiki dijkstra psudue code
 		//INI
 		for (i = 0; i < rows; i++)
 		{
-			dist[i] = std::numeric_limits<int>::max();;
+			dist[i] = std::numeric_limits<int>::max();
 			spt[i] = false; //allows us to mark visted 
 			prev[i] = 0;
 			parent[i] = 0;

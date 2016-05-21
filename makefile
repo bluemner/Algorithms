@@ -1,19 +1,24 @@
 SOURCE_FILES = main.cpp
 COMPILER = g++
-FLAGS =-w -ggdb
+FLAGS =-w -ggdb -std=c++11
 OUTPUT_FILE = bin/run.o
 OUTPUT_DIR = bin/
-all: a thread beta dijkstra maxSum 
+SOURCE_DIR = source/
+all: smallestSubsetSumGraterThanTreshold smallestSumNearThreshold thread beta dijkstra maxSum smallestSumNearThreshold a
 	
 a: $(SOURCE_FILES)
 	$(COMPILER) $(FLAGS) $(SOURCE_FILES) -o $(OUTPUT_FILE)
 thread: test1.cpp
-	$(COMPILER) $(FLAGS) -std=c++11 -pthread test1.cpp -o $(OUTPUT_DIR)test1.o
-beta: source/beta.cpp headers/beta.h
-	$(COMPILER) $(FLAGS) -std=c++11 source/beta.cpp -o $(OUTPUT_DIR)beta.o
-dijkstra: source/dijkstra.cpp source/graph.cpp
-	$(COMPILER) $(FLAGS) -std=c++11 source/graph.cpp source/dijkstra.cpp -o $(OUTPUT_DIR)dijkstra.o
-maxSum: source/maxSum.cpp 
-	$(COMPILER) $(FLAGS) -std=c++11 source/maxSum.cpp -o $(OUTPUT_DIR)maxSum.o
-graph: source/graph.cpp 
-	$(COMPILER) $(FLAGS) -std=c++11 source/graph.cpp -o $(OUTPUT_DIR)graph.o
+	$(COMPILER) $(FLAGS) -pthread test1.cpp -o $(OUTPUT_DIR)test1.o
+beta: $(SOURCE_DIR)beta.cpp headers/beta.h
+	$(COMPILER) $(FLAGS) $(SOURCE_DIR)beta.cpp -o $(OUTPUT_DIR)beta.o
+dijkstra: $(SOURCE_DIR)dijkstra.cpp $(SOURCE_DIR)graph.cpp
+	$(COMPILER) $(FLAGS) $(SOURCE_DIR)graph.cpp $(SOURCE_DIR)dijkstra.cpp -o $(OUTPUT_DIR)dijkstra.o
+maxSum: $(SOURCE_DIR)maxSum.cpp 
+	$(COMPILER) $(FLAGS) $(SOURCE_DIR)maxSum.cpp -o $(OUTPUT_DIR)maxSum.o
+graph: $(SOURCE_DIR)graph.cpp 
+	$(COMPILER) $(FLAGS) $(SOURCE_DIR)graph.cpp -o $(OUTPUT_DIR)graph.o
+smallestSumNearThreshold: $(SOURCE_DIR)smallestSumNearThreshold.cpp
+	$(COMPILER) $(FLAGS) $(SOURCE_DIR)smallestSumNearThreshold.cpp -o $(OUTPUT_DIR)smallestSumNearThreshold.o
+smallestSubsetSumGraterThanTreshold: $(SOURCE_DIR)f.cpp
+	$(COMPILER) $(FLAGS) $(SOURCE_DIR)smallestSubsetSumGraterThanTreshold.cpp -o $(OUTPUT_DIR)smallestSubsetSumGraterThanTreshold.o

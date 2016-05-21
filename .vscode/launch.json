@@ -35,6 +35,21 @@
 			"request": "launch",
 			"target": "./bin/run.o",
 			"cwd": "${workspaceRoot}"
+		},
+		{
+			"name": "smallestSumNearThreshold",
+			"type": "gdb",
+			"request": "launch",
+			"target": "./bin/smallestSumNearThreshold.o",
+			"cwd": "${workspaceRoot}"
+		},
+		{
+			"name": "smallestSubsetSumGraterThanTreshold",
+			"type": "gdb",
+			"request": "launch",
+			"target": "./bin/smallestSubsetSumGraterThanTreshold.o",
+			"cwd": "${workspaceRoot}"
 		}
+		
 	]
 }
