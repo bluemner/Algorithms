@@ -20,5 +20,5 @@ graph: $(SOURCE_DIR)graph.cpp
 	$(COMPILER) $(FLAGS) $(SOURCE_DIR)graph.cpp -o $(OUTPUT_DIR)graph.o
 smallestSumNearThreshold: $(SOURCE_DIR)smallestSumNearThreshold.cpp
 	$(COMPILER) $(FLAGS) $(SOURCE_DIR)smallestSumNearThreshold.cpp -o $(OUTPUT_DIR)smallestSumNearThreshold.o
-smallestSubsetSumGraterThanTreshold: $(SOURCE_DIR)f.cpp
+smallestSubsetSumGraterThanTreshold: $(SOURCE_DIR)smallestSubsetSumGraterThanTreshold.cpp
 	$(COMPILER) $(FLAGS) $(SOURCE_DIR)smallestSubsetSumGraterThanTreshold.cpp -o $(OUTPUT_DIR)smallestSubsetSumGraterThanTreshold.o
