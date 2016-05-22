@@ -1,16 +1,19 @@
+// ==========================================================
+// Author: Brandon Bluemner
+// Description: Appliction to find smallest Subset Sum
+//						  Grater Than A Given Treshold
+// ==========================================================
 #include <stdio.h>
 #include <stdlib.h>
 #include <climits>
 
-void destroy(int *arr)
-{
-	
-}
+// ==========================================================
 //
+// ==========================================================
 void printTable(int ** table, int * arr, int size,int target)
 {
 	int i, j ;
-		printf("\n─────┼─────────────────────────────────────────────────────────────────────────────────\n");
+	printf("\n─────┼─────────────────────────────────────────────────────────────────────────────────\n");
 	for ( i =1 ; i < size ; i++)
 	{
 		if ( i==1)
@@ -20,34 +23,39 @@ void printTable(int ** table, int * arr, int size,int target)
 				if(j==1)
 				{
 					printf("     │ ");					
-				}		
+				}//End-If
 				printf("%03d ",j);
-			}
+			}//End-For
 			printf("\n─────┼─────────────────────────────────────────────────────────────────────────────────\n");
-		}
+		}//End-If
 		for ( j =1; j< target ; j++)
 		{
 			
 			if(j==1)
 			{
 				printf("%05d│ ", arr[i-1]);
-			}
+			}//End-If
 			printf("%d   " ,table[i][j]);
-		}
+		}//End-For
 		printf("\n");
-	}
+	}//End-For
 }
 
+// =================================================
+// subset :: subset array
+// size :: size of subset array
+// This method will print out subset array to console
+// ==================================================
 void printSubsetTable(int * subset, int size)
 {
-		// Print the subset
+	// Print the subset
 	printf("Subset::" );
 	int i;
 	for(i =0; i< size; ++i)
 	{
 		if(subset[i] == -1)
 		{
-			//break;
+			break;
 		}
 		else if(i+1 <size && subset[i+1] != -1)
 		{
@@ -56,17 +64,14 @@ void printSubsetTable(int * subset, int size)
 		else
 		{
 			printf("%d ",subset[i] );
-		}
-			
-		
+		}			
 	}
 	printf("\n" );
 }
 // ================================================================================================
 // This method will go back threw the table and find the smallest subset grater then then threshold
-//
 // ================================================================================================
-void getSubSetSum(int ** table, int * arr, int size, int target, int threshold,int col, int row)
+void getSubSetSum(int ** table, int * arr, int size,int col, int row)
 {
   int current_col = col;
   int current_row = size;
@@ -79,7 +84,7 @@ void getSubSetSum(int ** table, int * arr, int size, int target, int threshold,i
 		subset[i]=-1;
 	}
 	//Check array for the minCol value
-	int found = -1;
+  int found = -1;
   for(i=row; i< size; ++i)
 	{
 		if(arr[i] == col)
@@ -87,12 +92,10 @@ void getSubSetSum(int ** table, int * arr, int size, int target, int threshold,i
 				subset[0] = col;
 				break;
 		}
-	}
-	
+	}	
 	//If not found we will have to go threw back trace of the alogrithm 
 	if( found == -1 )
-	{
-			
+	{		
 			int count =0;
 			for(i =current_row; i > -1; i--)
 			//while ( current_row > -1)
@@ -109,31 +112,32 @@ void getSubSetSum(int ** table, int * arr, int size, int target, int threshold,i
 				 //int u = table[i-1][j-arr[i-1]];
 				 if(arr[i-1] <= j && i-1 >-1 && j-arr[i-1] >-1 && table[i-1][j-arr[i-1]])
 				 {  
-					 
+					 //back trace up till on the correct row
 					  while( current_row-1 >= 0 && table[current_row-1][j-arr[i-1]] )
 						{
-							--current_row;
-							//printf("debug:%d [%d,%d]\n",arr[current_row], i, j);
-						}
-						
+							--current_row;							
+						}						
 					  current_col = j-arr[i-1];
 						subset[count++] = arr[current_row];
 						i= current_row ;///-1;
 						continue;
-				 }
-				 
-				}
-			 
-			}
-		
-	}
-			
-	printSubsetTable(subset,size);
-  
+				 }//End-If				 
+				}//End-for			 
+			}//End-for
+	}//End-If
+				
+	printSubsetTable( subset, size );  
 	free( subset );
 }
 
-void printTableCSV(int ** table, int * arr, int size,int target)
+// =====================================================================
+// table :: table of subset sums
+// size :: size of array of values
+// target :: Any number grater then your threshold, preferably one that in your array (upper bounds )
+// Method for translating table table to .csv file usable in
+//				 spreed sheet programs
+// =====================================================================
+void printTableCSV( int ** table, int * arr, int size,int target )
 {
 	int i, j ;
 	for ( i =1 ; i < size ; i++)
@@ -148,12 +152,10 @@ void printTableCSV(int ** table, int * arr, int size,int target)
 				}
 				printf("%03d,",j);
 			}
-			//printf("\n─────┼───────────────────────────────\n");
 			printf("\n");
 		}
 		for ( j =1; j< target ; j++)
-		{
-			
+		{			
 			if(j==1)
 			{
 				printf("%05d,", arr[i-1]);
@@ -163,6 +165,7 @@ void printTableCSV(int ** table, int * arr, int size,int target)
 		printf("\n");
 	}
 }
+
 // =======================================================================================
 // arr :: array of values
 // size :: size of array of values
@@ -174,25 +177,30 @@ void smallestSubsetSumGraterThanTreshold (int arr[], int size, int target, int t
   
   //Create table
   int **table ;
+	
+	// Allocate Memmory
   table = (int **) malloc (sizeof(int*) * (size+1)) ;
   
-  // Free Memmory
+  // Allocate Memmory
   for ( i = 0 ; i <= size ; i ++ ) 
   {
     table[i] = (int *) malloc (sizeof(int) * (target+1)) ;
-	//Set first row true
+	  //Set first row true
     table[i][0] = 1 ;
   }
   
-  ///Zero out table top row
+  //Zero out table top row
   for ( j = 1 ; j <= target ; j ++ )
-    table[0][j] = 0 ;
+	{
+		 table[0][j] = 0 ;
+	}
+	
+	//values for min value and it's row
   int minValue = target;
 	int firstRow = size;
-  //	
+	
   for ( i = 1 ; i <= size ; i ++ ) 
-  {
-		
+  {		
     for ( j = 1 ; j <= target ; j ++ )
 		{
 			// A: if the value above is true set this row's vale to true
@@ -205,30 +213,28 @@ void smallestSubsetSumGraterThanTreshold (int arr[], int size, int target, int t
 			
 			if ( j > threshold && j < minValue  && table[i][j] )
 			{			
-				  //printf("Here [%d,%d]\n",i+1,j);
-				  // printf("Here [%d]\n",arr[i+1]);		
-					minValue = j;
-					firstRow = i+1;
-			}
-			
+				 minValue = j;
+				 firstRow = i+1;
+			}			
 		}
    
   } // End-For
-  // if ( table[size][target] == 1 )
-  //  printf ( "\ntarget sum found\n\n" ) ; 
-  // 	else printf ( "\nTarget sum do not found!\n\n" ) ;
+	
   printf("Min Value :: %d\n", minValue );
   printf("Min row :: %d\n", firstRow );
-	getSubSetSum( table, arr, size, target, threshold, minValue, firstRow );
+	
+	getSubSetSum( table, arr, size, minValue, firstRow );
 	
   if ( target < 100 )
   {
 		printTable(table, arr, size +1, target +1);
   }
- 
   free (table) ;
 }
 
+// ==============================================
+//
+// ==============================================
 void subsetSum (int arr[], int size, int target) {
   int i, j ;
   int **table ;
@@ -238,24 +244,29 @@ void subsetSum (int arr[], int size, int target) {
     table[i][0] = 1 ;
   }
   for ( j = 1 ; j <= target ; j ++ )
-    table[0][j] = 0 ;
+	{
+		table[0][j] = 0 ;
+	}
+   
   for ( i = 1 ; i <= size ; i ++ ) {
     for ( j = 1 ; j <= target ; j ++ )
-      table[i][j] = table[i-1][j] || (arr[i-1] <= j && table[i-1][j-arr[i-1]] ) ;
+		{
+			table[i][j] = table[i-1][j] || (arr[i-1] <= j && table[i-1][j-arr[i-1]] ) ;
+		}
+      
   } 
  // if ( table[size][target] == 1 )
- // //  printf ( "\ntarget sum found\n\n" ) ; 
+ //    printf ( "\ntarget sum found\n\n" ) ; 
  // else printf ( "\nTarget sum do not found!\n\n" ) ;
  
   if ( target < 16 )
   {
-	//printTable(table, arr, size +1, target +1);	  
-	printTableCSV(table, arr, size +1, target +1);	
+		//printTable(table, arr, size +1, target +1);	  
+		printTableCSV(table, arr, size +1, target +1);	
   }else
   {
 	  printTableCSV(table, arr, size +1, target +1);	
-  }
- 
+  } 
   free (table) ;
 }
 
@@ -265,19 +276,17 @@ int main()
 	int arr[] = { 2,4,7,8,13, 17};
 	int size = sizeof(arr) / sizeof(arr[0]);
 	//for ( i =0; i < 16; ++i)
-	//subsetSum(arr, size, i); 
+			//subsetSum(arr, size, i); 
 	
 	smallestSubsetSumGraterThanTreshold(arr, size, 17, 12); 
 	printf("\n\n");
-	//printf("\n\nRunning 15k\n");
 	
 	int arr2[] = { 2,4,7,8,17};
 	size = sizeof(arr2) / sizeof(arr2[0]);
 	//for ( i =0; i < 16; ++i)
 	//subsetSum(arr, size, i); 
 	smallestSubsetSumGraterThanTreshold(arr2, size, 17, 12); 
-	
-	
+		
 	int weights2[1500];
 	for( i=0; i < 1500; ++i)
 	{
