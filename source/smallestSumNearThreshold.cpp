@@ -39,8 +39,7 @@ int main (int argc , char** argv)
 {
 	int arr[] =  {2, 4, 7, 8, 13}, x = 12;
     int n = sizeof(arr)/sizeof(arr[0]);
-	int theDriodYouA
-	reLookingFor = smallestSumNearThreshold(arr,n,x) ;
+	int theDriodYouAreLookingFor = smallestSumNearThreshold(arr,n,x) ;
 	std::cout << "Value for:" << x << " is " << theDriodYouAreLookingFor << std::endl;
 	return 0;
 }
