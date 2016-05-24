@@ -18,7 +18,7 @@ void printTable(int ** table, int * arr, int size,int target)
 	{
 		if ( i==1)
 		{
-			for ( j =1; j< target ; j++)
+			for ( j =1; j < target ; j++)
 			{	
 				if(j==1)
 				{
@@ -251,10 +251,10 @@ void subsetSum (int arr[], int size, int target) {
   for ( i = 1 ; i <= size ; i ++ ) {
     for ( j = 1 ; j <= target ; j ++ )
 		{
-			table[i][j] = table[i-1][j] || (arr[i-1] <= j && table[i-1][j-arr[i-1]] ) ;
+			table[i][j] = table[i-1][j] || ( arr[i-1] <= j && table[i-1][j-arr[i-1]] ) ;
 		}
-      
   } 
+	
  // if ( table[size][target] == 1 )
  //    printf ( "\ntarget sum found\n\n" ) ; 
  // else printf ( "\nTarget sum do not found!\n\n" ) ;
@@ -288,16 +288,15 @@ int main()
 	smallestSubsetSumGraterThanTreshold(arr2, size, 17, 12); 
 		
 	int weights2[1500];
-	for( i=0; i < 1500; ++i)
+	for ( i=0; i < 1500; ++i )
 	{
 		weights2[i] = i*2;
 	}
 	size = sizeof(weights2) / sizeof(weights2[0]);
-//	subsetSum(weights2, size, 256); 
-printf("\nLooking for N > 16\n");
+	//	subsetSum(weights2, size, 256); 
+	printf("\nLooking for N > 16\n");
 	smallestSubsetSumGraterThanTreshold( weights2, size, 256, 16);
 	printf("\nLooking for N > 158 for all even #\n");
 	smallestSubsetSumGraterThanTreshold( weights2, size, 256, 158);
 	return 0;
 }
-

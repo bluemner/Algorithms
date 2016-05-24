@@ -5,8 +5,8 @@ namespace betacore
 {
 	void kadane( int input[], int n, int &x1, int &x2, int &max )  
 	{  
-		int current_sum,
-		    i;  
+		int current_sum;
+		int i;  
 		max = 0;  
 		current_sum = 0;  
 		x1 = x2 = 0;  

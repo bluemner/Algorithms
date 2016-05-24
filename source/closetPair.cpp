@@ -5,7 +5,7 @@
 // ==================================================
 // Finds the cloest Set of numbers near the threshold
 // ==================================================
-void printClosest(int arr[], int size_of_array, int threshold)
+void printClosest ( int arr[], int size_of_array, int threshold )
 {
     int result_left,
         result_right; 
@@ -39,10 +39,10 @@ void printClosest(int arr[], int size_of_array, int threshold)
        // If this pair has a grater sum, move to smaller values.
        if ( arr[left] + arr[right] > threshold )
 	   {
-		   --right;
+		 --right;
 	   } else // Move to larger values
        {
-		    ++left;
+		  ++left;
 	   } 
     }
  
@@ -50,12 +50,13 @@ void printClosest(int arr[], int size_of_array, int threshold)
 }
  
 // Driver program to test above functions
-int main()
+int main ()
 {
-    int arr[] =  {2, 4, 7, 8, 13}, x = 12;
-    int n = sizeof(arr)/sizeof(arr[0]);
-    printClosest(arr, n, x);
-    printClosest(arr, n, 13);
-    printClosest(arr, n, 3);
+    int arr[] =  {2, 4, 7, 8, 13};
+    int x = 12;
+    int n = sizeof( arr ) / sizeof( arr[0] );
+    printClosest( arr, n, x );
+    printClosest( arr, n, 13 );
+    printClosest( arr, n, 3 );
     return 0;
 }
