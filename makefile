@@ -4,7 +4,7 @@ FLAGS =-w -ggdb -std=c++11
 OUTPUT_FILE = bin/run.o
 OUTPUT_DIR = bin/
 SOURCE_DIR = source/
-all:matrixChain smallestSubsetSumGraterThanTreshold smallestSumNearThreshold thread beta dijkstra maxSum smallestSumNearThreshold a
+all:maxSizeSqaureSubMartrix matrixChain smallestSubsetSumGraterThanTreshold smallestSumNearThreshold thread beta dijkstra maxSum smallestSumNearThreshold a 
 	
 a: $(SOURCE_FILES)
 	$(COMPILER) $(FLAGS) $(SOURCE_FILES) -o $(OUTPUT_FILE)
@@ -24,3 +24,5 @@ smallestSubsetSumGraterThanTreshold: $(SOURCE_DIR)smallestSubsetSumGraterThanTre
 	$(COMPILER) $(FLAGS) $(SOURCE_DIR)smallestSubsetSumGraterThanTreshold.cpp -o $(OUTPUT_DIR)smallestSubsetSumGraterThanTreshold.o
 matrixChain: $(SOURCE_DIR)matrixChain.cpp
 	$(COMPILER) $(FLAGS) $(SOURCE_DIR)matrixChain.cpp -o $(OUTPUT_DIR)matrixChain.o
+maxSizeSqaureSubMartrix: $(SOURCE_DIR)maxSizeSqaureSubMartrix.cpp
+	$(COMPILER) $(FLAGS) $(SOURCE_DIR)maxSizeSqaureSubMartrix.cpp -o $(OUTPUT_DIR)maxSizeSqaureSubMartrix.o

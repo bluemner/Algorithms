@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <climits>
 
+namespace betacore{
+	
 // ==========================================================
 //
 // ==========================================================
@@ -29,8 +31,7 @@ void printTable(int ** table, int * arr, int size,int target)
 			printf("\n─────┼─────────────────────────────────────────────────────────────────────────────────\n");
 		}//End-If
 		for ( j =1; j< target ; j++)
-		{
-			
+		{			
 			if(j==1)
 			{
 				printf("%05d│ ", arr[i-1]);
@@ -179,12 +180,11 @@ void smallestSubsetSumGraterThanTreshold (int arr[], int size, int target, int t
   int **table ;
 	
 	// Allocate Memmory
-  table = (int **) malloc (sizeof(int*) * (size+1)) ;
-  
+  table = (int **) malloc (sizeof(int*) * (size+1));  
   // Allocate Memmory
   for ( i = 0 ; i <= size ; i ++ ) 
   {
-    table[i] = (int *) malloc (sizeof(int) * (target+1)) ;
+    table[i] = (int *) malloc (sizeof(int) * (target+1));
 	  //Set first row true
     table[i][0] = 1 ;
   }
@@ -269,7 +269,7 @@ void subsetSum (int arr[], int size, int target) {
   } 
   free (table) ;
 }
-
+}
 int main()
 {
 	int i;
@@ -278,14 +278,14 @@ int main()
 	//for ( i =0; i < 16; ++i)
 			//subsetSum(arr, size, i); 
 	
-	smallestSubsetSumGraterThanTreshold(arr, size, 17, 12); 
+	betacore::smallestSubsetSumGraterThanTreshold(arr, size, 17, 12); 
 	printf("\n\n");
 	
 	int arr2[] = { 2,4,7,8,17};
 	size = sizeof(arr2) / sizeof(arr2[0]);
 	//for ( i =0; i < 16; ++i)
 	//subsetSum(arr, size, i); 
-	smallestSubsetSumGraterThanTreshold(arr2, size, 17, 12); 
+	betacore::smallestSubsetSumGraterThanTreshold(arr2, size, 17, 12); 
 		
 	int weights2[1500];
 	for ( i=0; i < 1500; ++i )
@@ -295,8 +295,8 @@ int main()
 	size = sizeof(weights2) / sizeof(weights2[0]);
 	//	subsetSum(weights2, size, 256); 
 	printf("\nLooking for N > 16\n");
-	smallestSubsetSumGraterThanTreshold( weights2, size, 256, 16);
+	betacore::smallestSubsetSumGraterThanTreshold( weights2, size, 256, 16);
 	printf("\nLooking for N > 158 for all even #\n");
-	smallestSubsetSumGraterThanTreshold( weights2, size, 256, 158);
+	betacore::smallestSubsetSumGraterThanTreshold( weights2, size, 256, 158);
 	return 0;
 }

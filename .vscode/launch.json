@@ -49,7 +49,15 @@
 			"request": "launch",
 			"target": "./bin/smallestSubsetSumGraterThanTreshold.o",
 			"cwd": "${workspaceRoot}"
+		},
+		{
+			"name": "maxSizeSqaureSubMartrix",
+			"type": "gdb",
+			"request": "launch",
+			"target": "./bin/maxSizeSqaureSubMartrix.o",
+			"cwd": "${workspaceRoot}"
 		}
+		
 		
 	]
 }

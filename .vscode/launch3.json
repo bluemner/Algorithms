@@ -41,6 +41,20 @@
 			"cwd": "${workspaceRoot}",
 			"environment": [],
 			"processId": 12345
+		},
+		{
+			"name": "maxSizeSqaureSubMartrix",
+			"type": "cppdbg",
+			"request": "launch",
+			"launchOptionType": "Local",
+			"miDebuggerPath": "/usr/bin/gdb",
+			"targetArchitecture": "x64",
+			"program": "${workspaceRoot}/bin/maxSizeSqaureSubMartrix.o",
+			"args": [],
+			"stopAtEntry": false,
+			"cwd": "${workspaceRoot}",
+			"environment": [],
+			"processId": 12345
 		}
 	]
 }

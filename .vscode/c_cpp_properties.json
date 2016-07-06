@@ -6,7 +6,7 @@
         },
         {
             "name": "Linux",
-            "includePath": ["/usr/include/c++/4.9.2"]
+            "includePath": ["/usr/include/c++/4.9.2","../headers"]
         },
         {
             "name": "Win32",

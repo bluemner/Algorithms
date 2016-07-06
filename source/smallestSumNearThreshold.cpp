@@ -16,8 +16,7 @@ int smallestSumNearThreshold( int array[], int size_of_array, int threshold )
 		while ( current_sum <= threshold && end < threshold )
 		{
 			current_sum += array[ end++ ];
-		} 
-		
+		} 		
 		// If current_sum crosses the threshold
 		while ( current_sum >= threshold && start < size_of_array )
 		{
@@ -26,8 +25,7 @@ int smallestSumNearThreshold( int array[], int size_of_array, int threshold )
 			{
 				min_len = end - start;
 				result = current_sum;
-			}
-			
+			}			
 			// remove starting elements
 			current_sum -= array[start++];
 		}

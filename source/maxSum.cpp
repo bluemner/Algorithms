@@ -81,8 +81,7 @@ int main ( int argc, char ** argv )
     betacore::find_max_sum(setX); 
     //std::cout << "Press Any Key to quit" << std::endl;
     //std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
-	
-	
+		
 	int gg[9][9] = {
 		            {0, 4, 0, 0, 0, 0, 0, 8, 0},
 					{4, 0, 8, 0, 0, 0, 0, 11, 0},
