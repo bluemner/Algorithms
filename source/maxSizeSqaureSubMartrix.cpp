@@ -41,8 +41,6 @@ namespace betacore
 				table[i][j]= 0;
 			}
 		}
-		printGraph(table);
-		std::cout << std::endl <<std::endl;
 		for(int i=0; i < rows; ++i )
 		{
 			for( int j=0; j< cols; ++j)
@@ -59,8 +57,6 @@ namespace betacore
 				else
 				{
 					table [i][j] = min ( table[i-1][j], min ( table[i-1][j-1], table[i][j-1] ) ) + 1;
-					printGraph(table);
-					std::cout << std::endl <<std::endl;
 				}
 				
 				if(table[i][j] > result)
