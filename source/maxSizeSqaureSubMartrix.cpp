@@ -45,20 +45,27 @@ namespace betacore
 		{
 			for( int j=0; j< cols; ++j)
 			{
+				//If first row set to graph value 
 				if( i ==0 || j == 0 )
 				{
 					table[i][j] = graph[i][j];
 					
 				}
+				// if graph is zero set table to zero
 				else if	( graph[i][j] == 0 )
 				{
 					table[i][j] = 0;
 				}
+				// else find the min values of N1,N2 & N3
+				//  N2 | N3
+				//  -----
+				//  N1 | X
 				else
 				{
 					table [i][j] = min ( table[i-1][j], min ( table[i-1][j-1], table[i][j-1] ) ) + 1;
 				}
 				
+				// Get the max value as result
 				if(table[i][j] > result)
 				{
 					result = table[i][j];

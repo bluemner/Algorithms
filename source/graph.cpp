@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "../headers/graph.h"
+#include <algorithm>
 //#include "../headers/dijkstra.h"
 namespace betacore
 {
@@ -89,6 +90,16 @@ namespace betacore
 		}
 	}
 
+	bool graph::compareByCost(const edge &a, const edge &b)
+	{
+    	return a.cost < b.cost;
+	}
+	
+	void graph::sortEdgesByCost()
+	{
+		std::sort(this.edges.begin(), this.edges.end(),compareByCost)
+		
+	}
 	
 	int graph::getEdgeCount(){
 		edges.size();

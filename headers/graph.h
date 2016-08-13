@@ -44,6 +44,8 @@ namespace betacore
 			node* getNode(int id);
 			edge* getEdge(int index );
 			
+			bool compareByCost(const edge &a, const edge &b);
+			void sortEdgesByCost();
 			
 			int getEdgeCount();
 			int getNodeCount();
