@@ -15,6 +15,13 @@
 			"target": "./bin/h1.o",
 			"cwd": "${workspaceRoot}"
 		},
+		    {
+			"name": "hw2",
+			"type": "gdb",
+			"request": "launch",
+			"target": "./bin/h2.o",
+			"cwd": "${workspaceRoot}"
+		},
 		{
 			"name": "Graph",
 			"type": "gdb",
