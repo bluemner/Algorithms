@@ -89,18 +89,18 @@ std::vector<std::vector<int>> merge(int (&X)[rows][cols], int size, int *V){
 			{
 		
 				int x[3];
-					x[X_L]=X[i][X_L];//X[0][X_L];
-					x[X_R]=X[i][X_R];// V[X_R];//V[X_L];
+					x[X_L]=X[i][X_L];
+					x[X_R]=X[i][X_R];
 					x[X_H]=X[i][X_H];
 				int t[3];
-					t[X_L]=X[i][X_R];//X[0][X_L];
-					t[X_R]=V[X_R];// V[X_R];//V[X_L];
+					t[X_L]=V[X_L];
+					t[X_R]=X[i][X_L]; 
 					t[X_H]=V[X_H];
-					//x + sizeof x / sizeof x[0]
-				std::vector<int> x_v; //(x, x + sizeof x / sizeof x[0]);
+					
+				std::vector<int> x_v; 
 				x_v.assign(x , x + V_SIZE);
 				
-				std::vector<int> v_v; //(x, x + sizeof x / sizeof x[0]);
+				std::vector<int> v_v; 
 				v_v.assign(t , t + V_SIZE);
 				new_x.push_back(x_v);	
 				new_x.push_back(v_v);
@@ -120,7 +120,7 @@ std::vector<std::vector<int>> merge(int (&X)[rows][cols], int size, int *V){
 				// 	t[X_H]=V[X_H];
 				// 	std::vector<int> v_v; //(x, x + sizeof x / sizeof x[0]);
 				// v_v.assign(t , t + V_SIZE);
-				//new_x.push_back(v_v);
+				//new_x.	push_back(v_v);
 			
 				std::vector<int> x_v(x, x + sizeof x / sizeof x[0]);			
 				new_x.push_back(x_v);
