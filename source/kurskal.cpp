@@ -42,7 +42,7 @@ int ** krusakl (beatcore::graph G)
 
 	for( i = 0; i < G.getEdgeCount; ++i)
 	{
-		if (find(G.getEdge(i).source).id !== find(G.getEdge(i).target).id )
+		if ( find(G.getEdge(i).source).id !== find(G.getEdge(i).target).id )
 	}
 	
 
