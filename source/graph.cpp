@@ -97,7 +97,7 @@ namespace betacore
 	
 	void graph::sortEdgesByCost()
 	{
-		std::sort(this.edges.begin(), this.edges.end(),compareByCost)
+		//std::sort(this->edges->begin(), this->edges->end(),compareByCost)
 		
 	}
 	
