@@ -31,6 +31,8 @@ int linar_c_search(int n, int (&A)[rows][cols])
 
 	return x;
 }
+
+
 int main(int argc, char **argv)
 {
     // A1.Length -> 3
@@ -52,10 +54,10 @@ int main(int argc, char **argv)
 
 	n = 4;
     int A2[4][4] = {
+	{0, 1, 0, 1},
 	{0, 1, 0, 0},
-	{0, 1, 0, 0},
-	{0, 1, 0, 0},
-	{0, 1, 0, 0},
+	{0, 1, 1, 0},
+	{1, 1, 0, 0},
     };
 	r = linar_c_search(n,A2) ;
 	if( r != -1)
@@ -68,11 +70,11 @@ int main(int argc, char **argv)
 
     n = 5;
     int A3[5][5] = {
+	{1, 1, 1, 1, 1},
+	{0, 1, 0, 1, 0},
+	{1, 0, 1, 1, 0},
 	{0, 0, 0, 1, 0},
-	{0, 0, 0, 1, 0},
-	{0, 0, 0, 1, 0},
-	{0, 0, 0, 1, 0},
-	{0, 0, 0, 1, 0},
+	{1, 1, 0, 1, 0},
     };
 
 	r = linar_c_search(n,A3) ;

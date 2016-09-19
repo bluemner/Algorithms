@@ -97,7 +97,11 @@ namespace betacore
 	
 	void graph::sortEdgesByCost()
 	{
+<<<<<<< HEAD
 		//std::sort(this->edges->begin(), this->edges->end(),compareByCost)
+=======
+		//std::sort(this->edges.begin(), this->edges.end(),compareByCost)
+>>>>>>> 727d1ac77a9bebe108e0e81c1b3bdbc84f0e949d
 		
 	}
 	
