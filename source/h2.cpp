@@ -220,9 +220,6 @@ void merge_vectors(std::vector<std::vector<int>> &X, std::vector<int> &V, std::v
 					t[X_L]=V[X_L];
 					t[X_R]=X[i][X_L]; 
 					t[X_H]=V[X_H];
-					
-				
-				
 				
 				new_x.push_back(std::vector<int>(x , x + V_SIZE));	
 				new_x.push_back(std::vector<int>(t , t + V_SIZE));
@@ -276,6 +273,7 @@ void skyline(std::vector<std::vector<int>> &X, std::vector<std::vector<int>> &re
 	
 
 }
+
 int main(int argc, char ** argv){
 	std::cout << "Case 1" <<std::endl;
 	int Case1 [1][V_SIZE] ={
