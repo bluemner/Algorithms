@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include <vector>
 #define X_L 0
 #define X_R 1
@@ -249,6 +250,9 @@ void merge_vectors(std::vector<std::vector<int>> &X, std::vector<int> &V, std::v
 	}
 
 }
+
+
+
 void merge_buildings(std::vector<std::vector<int>> &X, std::vector<std::vector<int>> &Y, std::vector<std::vector<int>> &new_x){
 	
 	//int maxHeight = getMaxHeight(X);
@@ -282,7 +286,7 @@ void merge_buildings(std::vector<std::vector<int>> &X, std::vector<std::vector<i
 				    new_x.push_back(Y[j]);
 					 ++j;
 			}
-			else if( X[i][X_H] > Y[j][X_H] ){
+			else {
 				std::cout << X[i][X_H]<< " vs " << Y[j][X_H] <<std::endl;
 				std::cout <<"_XH_" <<X[i][X_H]<< " JH" <<Y[j][X_H] <<std::endl;
 				std::cout <<"X (" <<X[i][X_L]<<"," <<X[i][X_R]<<","  <<X[i][X_H]<< ") JH" <<Y[j][X_H] <<std::endl;
@@ -298,18 +302,7 @@ void merge_buildings(std::vector<std::vector<int>> &X, std::vector<std::vector<i
 					 ++j;
 					
 			}
-			else {
-					std::cout <<"_XH" <<X[i][X_H]<< " JH" <<Y[j][X_H] <<std::endl;
-				int y[3];
-					y[X_L]=X[i][X_R];
-					y[X_R]=Y[j][X_R];///Y[j][X_L];
-					y[X_H]=Y[j][X_H];
-					
-					new_x.push_back(X[i]);
-					new_x.push_back(std::vector<int> (y, y + sizeof y / sizeof y[0]));
-										
-					 ++j;
-			}
+			
 		
 		}else{ 
 			if(X[i][X_H] < X[j][X_H]){
@@ -382,7 +375,7 @@ void skyline(std::vector<std::vector<int>> &X, std::vector<std::vector<int>> &re
 	
 
 }
-
+bool sortf (std::vector<int> i,std::vector<int> j) { return (i[0]<j[0]); }
 void skyline_recursion(std::vector<std::vector<int>> &input, std::vector<std::vector<int>> &result ){   
 	if(input.size() <2){
 		std::vector<std::vector<int>>  split_lo;
@@ -402,6 +395,7 @@ void skyline_recursion(std::vector<std::vector<int>> &input, std::vector<std::ve
 
 	merge_buildings(result_lo,result_hi, result );
 	std::cout<<"_________________" <<std::endl;
+	std::sort (result.begin(), result.end(), sortf);
 	print_result(result);
 	std::cout<<"_________________" <<std::endl;
 
