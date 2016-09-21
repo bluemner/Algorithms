@@ -266,11 +266,9 @@ void merge_buildings(std::vector<std::vector<int>> &X, std::vector<std::vector<i
 		}
 		
 		if(Y[j][X_L] > X[i][X_R] &&j< Y.size()){
-			//std::cout <<"X (" <<X[i][X_L]<<"," <<X[i][X_R]<<","  <<X[i][X_H]<< ") JH" <<Y[j][X_H] <<std::endl;
+			std::cout <<"X (" <<X[i][X_L]<<"," <<X[i][X_R]<<","  <<X[i][X_H]<< ") JH" <<Y[j][X_H] <<std::endl;
 			new_x.push_back(X[i]);
-		//	continue;
-		}else{
-			//std::cout <<"pp X (" <<X[i][X_L]<<"," <<X[i][X_R]<<","  <<X[i][X_H]<< ") JH" <<Y[j][X_H] <<std::endl;
+		
 		}
 		if( Y[j][X_L] < X[i][X_R] ){
 		
@@ -283,19 +281,34 @@ void merge_buildings(std::vector<std::vector<int>> &X, std::vector<std::vector<i
 					new_x.push_back(X[i]);
 				    new_x.push_back(Y[j]);
 					 ++j;
-			}else if()
-			else{
-				std::cout <<"_XH" <<X[i][X_H]<< " JH" <<Y[j][X_H] <<std::endl;
-				int x[3];
-					x[X_L]=X[i][X_R];
-					x[X_R]=Y[j][X_R];///Y[j][X_L];
-					x[X_H]=Y[j][X_H];
+			}
+			else if( X[i][X_H] > Y[j][X_H] ){
+				std::cout << X[i][X_H]<< " vs " << Y[j][X_H] <<std::endl;
+				std::cout <<"_XH_" <<X[i][X_H]<< " JH" <<Y[j][X_H] <<std::endl;
+				std::cout <<"X (" <<X[i][X_L]<<"," <<X[i][X_R]<<","  <<X[i][X_H]<< ") JH" <<Y[j][X_H] <<std::endl;
+				std::cout <<"Y (" <<Y[j][X_L]<<"," <<Y[j][X_R]<<","  <<Y[j][X_H]<< ") JH" <<Y[j][X_H] <<std::endl;
+				int y[3];
+					y[X_L]=X[i][X_R];
+					y[X_R]=Y[j][X_R];///Y[j][X_L];
+					y[X_H]=Y[j][X_H];
 					
 					new_x.push_back(X[i]);
-					new_x.push_back(std::vector<int> (x, x + sizeof x / sizeof x[0]));
+					new_x.push_back(std::vector<int> (y, y + sizeof y / sizeof y[0]));
 										
 					 ++j;
-
+					
+			}
+			else {
+					std::cout <<"_XH" <<X[i][X_H]<< " JH" <<Y[j][X_H] <<std::endl;
+				int y[3];
+					y[X_L]=X[i][X_R];
+					y[X_R]=Y[j][X_R];///Y[j][X_L];
+					y[X_H]=Y[j][X_H];
+					
+					new_x.push_back(X[i]);
+					new_x.push_back(std::vector<int> (y, y + sizeof y / sizeof y[0]));
+										
+					 ++j;
 			}
 		
 		}else{ 
