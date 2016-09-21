@@ -256,7 +256,7 @@ void merge_buildings(std::vector<std::vector<int>> &X, std::vector<std::vector<i
 	int i =0;
 	int j= 0;
 
-	
+	/*
 	for( ;  i < X.size(); i++)
 	{   
 	
@@ -328,7 +328,38 @@ void merge_buildings(std::vector<std::vector<int>> &X, std::vector<std::vector<i
 			} 
 		}
 		
+	}*/
+	while( i < X.size() && j < Y.size() ){
+		if(X[i][X_R] > Y[j][X_L]){
+			if(X[i][X_H] < Y[j][X_H]){
+				//Shrink X
+				int v[3];
+					v[X_L]=X[i][X_L];
+					v[X_R]=Y[j][X_L];
+					v[X_H]=X[i][X_H];					
+					new_x.push_back(std::vector<int> (v, v + sizeof v / sizeof v[0]));
+					new_x.push_back(Y[j]);
+					break;
+			}else{
+				if(X[i][X_R]> Y[j][X_L]){
+					++j; //Domination
+				}else{
+					//Shrink Y
+					int v[3];
+					v[X_L]=X[i][X_R];
+					v[X_R]=Y[j][X_R];
+					v[X_H]=Y[j][X_H];					
+					new_x.push_back(std::vector<int> (v, v + sizeof v / sizeof v[0]));
+					++j;
+					break; //? 
+				}
+			}
+		}else{
+			new_x.push_back(X[i]);
+			++i;
+		}
 	}
+
 	while(i< X.size()){
 		new_x.push_back(X[i]);
 		++i;
@@ -339,7 +370,7 @@ void merge_buildings(std::vector<std::vector<int>> &X, std::vector<std::vector<i
 		new_x.push_back(Y[j]);
 		++j;
 	}
-
+	
 	
 	//std::cout <<"Exit"<<std::endl;
 }
@@ -372,9 +403,7 @@ void skyline(std::vector<std::vector<int>> &X, std::vector<std::vector<int>> &re
 	
 
 }
-<<<<<<< HEAD
 
-=======
 bool sortf (std::vector<int> i,std::vector<int> j) { return (i[0]<j[0]); }
 void skyline_recursion(std::vector<std::vector<int>> &input, std::vector<std::vector<int>> &result ){   
 	if(input.size() <2){
@@ -411,7 +440,7 @@ void print_result(std::vector<std::vector<int>> &result)
 		std::cout<< std::endl;
 	}
 }
->>>>>>> e6fdcdd4b08b3942b06c868719a4dd92b25d5a4c
+
 int main(int argc, char ** argv){
 	std::cout << "Case 1" <<std::endl;
 	int Case1 [1][V_SIZE] ={
