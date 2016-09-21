@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include <vector>
 #define X_L 0
 #define X_R 1
@@ -7,8 +8,9 @@
 
 
 void merge_vectors(std::vector<std::vector<int>> &X, std::vector<int> &V, std::vector<std::vector<int>> &new_x);
+void merge_buildings(std::vector<std::vector<int>> &X, std::vector<std::vector<int>> &Y, std::vector<std::vector<int>> &new_x);
 int getMaxHeight(std::vector<std::vector<int>> &X);
-
+void print_result(std::vector<std::vector<int>> &result);
 
 
 template <size_t rows, size_t cols>
@@ -246,14 +248,111 @@ void merge_vectors(std::vector<std::vector<int>> &X, std::vector<int> &V, std::v
 
 }
 
+
+
+void merge_buildings(std::vector<std::vector<int>> &X, std::vector<std::vector<int>> &Y, std::vector<std::vector<int>> &new_x){
+	
+	//int maxHeight = getMaxHeight(X);
+	int i =0;
+	int j= 0;
+
+	
+	for( ;  i < X.size(); i++)
+	{   
+	
+		//std::cout <<"i:"<<i<<" j:"<<j<<std::endl;
+		if( j >= Y.size())
+		{
+			break;
+		}
+		
+		if(Y[j][X_L] > X[i][X_R] &&j< Y.size()){
+			std::cout <<"X (" <<X[i][X_L]<<"," <<X[i][X_R]<<","  <<X[i][X_H]<< ") JH" <<Y[j][X_H] <<std::endl;
+			new_x.push_back(X[i]);
+		
+		}
+		if( Y[j][X_L] < X[i][X_R] ){
+		
+			if(X[i][X_H] < Y[j][X_H]){
+				std::cout <<"XH" <<X[i][X_H]<< " JH" <<Y[j][X_H] <<std::endl;
+				int x[3];
+					x[X_L]=X[i][X_R];
+					x[X_R]=Y[j][X_L];
+					x[X_H]=X[i][X_H];				
+					new_x.push_back(X[i]);
+				    new_x.push_back(Y[j]);
+					 ++j;
+			}
+			else {
+				std::cout << X[i][X_H]<< " vs " << Y[j][X_H] <<std::endl;
+				std::cout <<"_XH_" <<X[i][X_H]<< " JH" <<Y[j][X_H] <<std::endl;
+				std::cout <<"X (" <<X[i][X_L]<<"," <<X[i][X_R]<<","  <<X[i][X_H]<< ") JH" <<Y[j][X_H] <<std::endl;
+				std::cout <<"Y (" <<Y[j][X_L]<<"," <<Y[j][X_R]<<","  <<Y[j][X_H]<< ") JH" <<Y[j][X_H] <<std::endl;
+				int y[3];
+					y[X_L]=X[i][X_R];
+					y[X_R]=Y[j][X_R];///Y[j][X_L];
+					y[X_H]=Y[j][X_H];
+					
+					new_x.push_back(X[i]);
+					new_x.push_back(std::vector<int> (y, y + sizeof y / sizeof y[0]));
+										
+					 ++j;
+					
+			}
+			
+		
+		}else{ 
+			if(X[i][X_H] < X[j][X_H]){
+				std::cout <<"X_H" <<X[i][X_H]<< " JH" <<Y[j][X_H] <<std::endl;
+				//new_x.push_back(Y[j]);
+				
+
+				++j;
+			}else{
+				if(X[i][X_R] < Y[j][X_L])
+				{
+					continue;
+				}
+				 std::cout <<"XH_" <<X[i][X_H]<< " JH" <<Y[j][X_H] <<std::endl;
+				 int x[3];
+				 	x[X_L]=X[i][X_L];
+				 	x[X_R]=Y[j][X_L];
+				 	x[X_H]=X[i][X_H];
+					
+				 	new_x.push_back(std::vector<int> (x, x + sizeof x / sizeof x[0]));
+					 
+					//new_x.push_back(Y[j]);
+					 ++j;
+			
+
+			} 
+		}
+		
+	}
+	while(i< X.size()){
+		new_x.push_back(X[i]);
+		++i;
+	}
+	while(j < Y.size())
+	{
+		
+		new_x.push_back(Y[j]);
+		++j;
+	}
+
+	
+	//std::cout <<"Exit"<<std::endl;
+}
+
 void skyline(std::vector<std::vector<int>> &X, std::vector<std::vector<int>> &result ){   
 	int n; 
 
 	std::vector<std::vector<int>> m_n;
 	
 	//Get first elemnt as a vector....
+	// k over lap 
 	m_n.push_back(X.at(0));
-
+	//n  
 	for( n=1; n<X.size(); ++n ){
 				
 		if(  X[n][X_L] < X[n-1][X_R] ){
@@ -273,7 +372,46 @@ void skyline(std::vector<std::vector<int>> &X, std::vector<std::vector<int>> &re
 	
 
 }
+<<<<<<< HEAD
 
+=======
+bool sortf (std::vector<int> i,std::vector<int> j) { return (i[0]<j[0]); }
+void skyline_recursion(std::vector<std::vector<int>> &input, std::vector<std::vector<int>> &result ){   
+	if(input.size() <2){
+		std::vector<std::vector<int>>  split_lo;
+		merge_buildings(input,split_lo , result );
+		return;
+	}
+	std::size_t const half_size = input.size() / 2;
+	std::vector<std::vector<int>>  split_lo(input.begin(), input.begin() + half_size);
+	std::vector<std::vector<int>>  split_hi(input.begin() + half_size, input.end());
+	
+	std::vector<std::vector<int>> result_lo;
+	std::vector<std::vector<int>> result_hi;
+
+	
+	skyline_recursion(split_lo,result_lo);	
+	skyline_recursion(split_hi,result_hi);	
+
+	merge_buildings(result_lo,result_hi, result );
+	std::cout<<"_________________" <<std::endl;
+	std::sort (result.begin(), result.end(), sortf);
+	print_result(result);
+	std::cout<<"_________________" <<std::endl;
+
+}
+void print_result(std::vector<std::vector<int>> &result)	
+{
+	for (std::vector<std::vector<int>>::const_iterator i = result.begin(); i != result.end(); ++i)
+    {
+		for (std::vector<int>::const_iterator j = i->begin(); j != i->end(); ++j)
+		{
+				std::cout << *j << ' ';
+		}
+		std::cout<< std::endl;
+	}
+}
+>>>>>>> e6fdcdd4b08b3942b06c868719a4dd92b25d5a4c
 int main(int argc, char ** argv){
 	std::cout << "Case 1" <<std::endl;
 	int Case1 [1][V_SIZE] ={
@@ -406,14 +544,113 @@ int main(int argc, char ** argv){
 	};	
 	result.clear();
 	skyline(Case4,result);
+	print_result(result);
 
-	for (std::vector<std::vector<int>>::const_iterator i = result.begin(); i != result.end(); ++i)
-    {
-		for (std::vector<int>::const_iterator j = i->begin(); j != i->end(); ++j)
-		{
-				std::cout << *j << ' ';
-		}
-		std::cout<< std::endl;
-	}
+
+	std::cout << "__________" <<std::endl;
+	std::cout << "Case X " <<std::endl;
+	std::cout << "__________" <<std::endl;
+	// =========================
+	// Case 
+	// =========================
+	std::vector<std::vector<int>> CaseX { // [5][V_SIZE] =
+		{  1,  2, 2 },
+		{  2,  4, 3 }
+	};	
+	std::vector<std::vector<int>> CaseY { // [5][V_SIZE] =
+		{  3,  6, 4 },
+		{  6,  7, 2 }
+	};	
+	result.clear();
+	merge_buildings(CaseX,CaseY,result);
+	print_result(result);
+
+	std::cout << "__________" <<std::endl;
+	std::cout << "Case beta -1 " <<std::endl;
+	std::cout << "__________" <<std::endl;
+	// =========================
+	// Case 
+	// =========================
+	std::vector<std::vector<int>> CaseX11 { // [5][V_SIZE] =
+		{  2,  5, 8 },
+
+	
+	};	
+	std::vector<std::vector<int>> CaseY11
+	{			{  4,  7, 3 }
+		//{  9, 13, 2 },
+		//{ 10, 14, 7 }
+		};
+	result.clear();
+	merge_buildings(CaseX11, CaseY11 ,result);
+	print_result(result);
+	std::cout << "__________" <<std::endl;
+	std::cout << "Case beta " <<std::endl;
+	std::cout << "__________" <<std::endl;
+	// =========================
+	// Case 
+	// =========================
+	std::vector<std::vector<int>> CaseX1 { // [5][V_SIZE] =
+		{  2,  5, 8 },
+		{  4,  7, 3 }
+	
+	};	
+	std::vector<std::vector<int>> CaseY1
+	{	{  8, 11, 4 },
+		//{  9, 13, 2 },
+		//{ 10, 14, 7 }
+		};
+	result.clear();
+	merge_buildings(CaseX1, CaseY1 ,result);
+	print_result(result);
+
+
+	// =========================
+	// Case 
+	// =========================
+	std::cout << "__________" <<std::endl;
+	std::cout << "Case beta 2" <<std::endl;
+	std::cout << "__________" <<std::endl;
+	std::vector<std::vector<int>> CaseX2 { // [5][V_SIZE] =
+		{  9, 13, 2 }
+	
+	};	
+	std::vector<std::vector<int>> CaseY2
+	{	//{  8, 11, 4 },
+	
+		{ 10, 14, 7 }
+		};
+	result.clear();
+	merge_buildings(CaseX2, CaseY2 ,result);
+	print_result(result);
+		// =========================
+	// Case 
+	// =========================
+	std::cout << "__________" <<std::endl;
+	std::cout << "Case beta 3" <<std::endl;
+	std::cout << "__________" <<std::endl;
+	std::vector<std::vector<int>>  input	 { // [5][V_SIZE] =
+		{  2,  5, 8 },
+		{  4,  7, 3 },
+		{  8, 11, 4 },
+		{  9, 13, 2 },
+		{ 10, 14, 7 }
+	};		
+	
+	std::size_t const half_size = input.size() / 2;
+	std::vector<std::vector<int>>  split_lo(input.begin(), input.begin() + half_size);
+	std::vector<std::vector<int>>  split_hi(input.begin() + half_size, input.end());
+	result.clear();
+	merge_buildings(split_lo, split_hi ,result);
+	print_result(result);
+	// =========================
+	// Case 
+	// =========================
+	std::cout << "__________" <<std::endl;
+	std::cout << "ALL" <<std::endl;
+	std::cout << "__________" <<std::endl;
+	result.clear();
+	skyline_recursion(input,result);
+    print_result(result);
 	return 0;
 }
