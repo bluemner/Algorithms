@@ -252,106 +252,54 @@ void merge_vectors(std::vector<std::vector<int>> &X, std::vector<int> &V, std::v
 
 void merge_buildings(std::vector<std::vector<int>> &X, std::vector<std::vector<int>> &Y, std::vector<std::vector<int>> &new_x){
 	
-	//int maxHeight = getMaxHeight(X);
-	int i =0;
-	int j= 0;
+	int i =0; int j= 0;
 
-	/*
-	for( ;  i < X.size(); i++)
-	{   
-	
-		//std::cout <<"i:"<<i<<" j:"<<j<<std::endl;
-		if( j >= Y.size())
-		{
-			break;
-		}
-		
-		if(Y[j][X_L] > X[i][X_R] &&j< Y.size()){
-			std::cout <<"X (" <<X[i][X_L]<<"," <<X[i][X_R]<<","  <<X[i][X_H]<< ") JH" <<Y[j][X_H] <<std::endl;
-			new_x.push_back(X[i]);
-		
-		}
-		if( Y[j][X_L] < X[i][X_R] ){
-		
-			if(X[i][X_H] < Y[j][X_H]){
-				std::cout <<"XH" <<X[i][X_H]<< " JH" <<Y[j][X_H] <<std::endl;
-				int x[3];
-					x[X_L]=X[i][X_R];
-					x[X_R]=Y[j][X_L];
-					x[X_H]=X[i][X_H];				
-					new_x.push_back(X[i]);
-				    new_x.push_back(Y[j]);
-					 ++j;
-			}
-			else {
-				std::cout << X[i][X_H]<< " vs " << Y[j][X_H] <<std::endl;
-				std::cout <<"_XH_" <<X[i][X_H]<< " JH" <<Y[j][X_H] <<std::endl;
-				std::cout <<"X (" <<X[i][X_L]<<"," <<X[i][X_R]<<","  <<X[i][X_H]<< ") JH" <<Y[j][X_H] <<std::endl;
-				std::cout <<"Y (" <<Y[j][X_L]<<"," <<Y[j][X_R]<<","  <<Y[j][X_H]<< ") JH" <<Y[j][X_H] <<std::endl;
-				int y[3];
-					y[X_L]=X[i][X_R];
-					y[X_R]=Y[j][X_R];///Y[j][X_L];
-					y[X_H]=Y[j][X_H];
-					
-					new_x.push_back(X[i]);
-					new_x.push_back(std::vector<int> (y, y + sizeof y / sizeof y[0]));
-										
-					 ++j;
-					
-			}
-			
-		
-		}else{ 
-			if(X[i][X_H] < X[j][X_H]){
-				std::cout <<"X_H" <<X[i][X_H]<< " JH" <<Y[j][X_H] <<std::endl;
-				//new_x.push_back(Y[j]);
-				
-
-				++j;
-			}else{
-				if(X[i][X_R] < Y[j][X_L])
-				{
-					continue;
-				}
-				 std::cout <<"XH_" <<X[i][X_H]<< " JH" <<Y[j][X_H] <<std::endl;
-				 int x[3];
-				 	x[X_L]=X[i][X_L];
-				 	x[X_R]=Y[j][X_L];
-				 	x[X_H]=X[i][X_H];
-					
-				 	new_x.push_back(std::vector<int> (x, x + sizeof x / sizeof x[0]));
-					 
-					//new_x.push_back(Y[j]);
-					 ++j;
-			
-
-			} 
-		}
-		
-	}*/
 	while( i < X.size() && j < Y.size() ){
 		if(X[i][X_R] > Y[j][X_L]){
 			if(X[i][X_H] < Y[j][X_H]){
 				//Shrink X
+				//       _______
+				//      |       |
+				//   ___|___    |
+				//  |   |   |   |
+				//  
+				// Becomes:
+			    //       _______
+				//      |       |
+				//   ___|       |
+				//  |   |       |
 				int v[3];
 					v[X_L]=X[i][X_L];
 					v[X_R]=Y[j][X_L];
 					v[X_H]=X[i][X_H];					
 					new_x.push_back(std::vector<int> (v, v + sizeof v / sizeof v[0]));
 					new_x.push_back(Y[j]);
+					++j; ++i;
 					break;
 			}else{
-				if(X[i][X_R]> Y[j][X_L]){
-					++j; //Domination
+				if(X[i][X_R]> Y[j][X_R]){
+					//Case: Domination 
+					//    X Domanates Y
+					//  ________
+					// |  ____  |
+					// | |xxxx| |
+					//
+					// Becomes:
+					//  ________
+					// |  ____  |
+					// | |xxxx| |
+
+					++j; 
 				}else{
-					//Shrink Y
+					//Shrink Y  
+					//
 					int v[3];
 					v[X_L]=X[i][X_R];
 					v[X_R]=Y[j][X_R];
 					v[X_H]=Y[j][X_H];					
 					new_x.push_back(std::vector<int> (v, v + sizeof v / sizeof v[0]));
 					++j;
-					break; //? 
+					//break; //? 
 				}
 			}
 		}else{
@@ -421,7 +369,7 @@ void skyline_recursion(std::vector<std::vector<int>> &input, std::vector<std::ve
 	
 	skyline_recursion(split_lo,result_lo);	
 	skyline_recursion(split_hi,result_hi);	
-
+    result.clear();
 	merge_buildings(result_lo,result_hi, result );
 	std::cout<<"_________________" <<std::endl;
 	std::sort (result.begin(), result.end(), sortf);
