@@ -9,14 +9,12 @@ namespace betacore{
 	void print_tree(Node *head, std::string path)
 	{
 		if(!head)
-		return;
-	
-	
-		
-		print_tree(head->left, path+"0");
-			if(head->word !='~'){
-				std::cout<< head->word << ":" << path<< std::endl;
-			}
+		   return;
+
+		if(head->word !='~'){
+			std::cout<< head->word << ":" << path<< std::endl;
+		}
+		print_tree(head->left , path+"0");
 		print_tree(head->right, path+"1");
 	}
 
@@ -25,23 +23,25 @@ namespace betacore{
 
 		std::priority_queue<Node*, std::vector<Node*>, Node_Compare> pq;
 
-		 for (std::map<char,double>::iterator it=Table.begin(); it!=Table.end(); ++it){
+		for (std::map<char,double>::iterator it=Table.begin(); it!=Table.end(); ++it){
 			pq.push(new Node(it->first, it->second));
+                       //std::cout  << it->first<< ":"<< it->second <<std::endl;
 		}
-		
-		while(pq.size() > 1){
+		std::cout << "Size:" << pq.size() <<std::endl;
+
+		while(pq.size() != 1){
 			left = pq.top();
-			pq.pop(); // delete is called here :)
+			pq.pop();
 
 			right = pq.top();
-			pq.pop(); // delete is called here :)
-			//Merge 
+			pq.pop();
+			//Merge
 			_node =  new Node('~', left->freq + right->freq);
 			_node->left = left;
 			_node->right = right;
 			// Back to the que you go....
 			pq.push(_node);
-		
+
 		}
 		print_tree(pq.top(), std::string(""));
 

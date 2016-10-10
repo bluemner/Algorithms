@@ -7,6 +7,7 @@ namespace betacore {
 		Node *left;
 		Node *right;
 		Node(char word, double freq){
+		        left = right  = NULL;
 			this->word = word;
 			this->freq = freq;
 		}
