@@ -4,7 +4,7 @@ FLAGS =-w -ggdb -std=c++11
 OUTPUT_FILE = bin/run.o
 OUTPUT_DIR = bin/
 SOURCE_DIR = source/
-all:h1 h2 maxSizeSqaureSubMartrix matrixChain smallestSubsetSumGraterThanTreshold smallestSumNearThreshold thread beta dijkstra maxSum smallestSumNearThreshold a 
+all:dijkstra h1 h2 maxSizeSqaureSubMartrix matrixChain smallestSubsetSumGraterThanTreshold smallestSumNearThreshold thread beta  maxSum smallestSumNearThreshold a 
 	
 a: $(SOURCE_FILES)
 	$(COMPILER) $(FLAGS) $(SOURCE_FILES) -o $(OUTPUT_FILE)

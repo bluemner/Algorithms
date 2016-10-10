@@ -9,7 +9,7 @@
 
 void merge_vectors(std::vector<std::vector<int>> &X, std::vector<int> &V, std::vector<std::vector<int>> &new_x);
 void merge_buildings(std::vector<std::vector<int>> &X, std::vector<std::vector<int>> &Y, std::vector<std::vector<int>> &new_x);
-int getMaxHeight(std::vector<std::vector<int>> &X);
+int  getMaxHeight(std::vector<std::vector<int>> &X);
 void print_result(std::vector<std::vector<int>> &result);
 
 

@@ -85,7 +85,7 @@ namespace betacore
 		
 	}
 
-/*
+/**
 Wiki dijkstra psudue code 
  1  function Dijkstra(Graph, source):
  2
@@ -117,12 +117,15 @@ Wiki dijkstra psudue code
 		int rows = G->getEdgeCount();
 		int dist[rows];
 		int prev[rows];
+		int count[rows];
 		bool spt[rows];
 		
+
 		for(i = 0; i < rows; ++i){
 			dist[i] = std::numeric_limits<int>::max();
 		 	spt[i] = false; //allows us to mark visted 
 			prev[i] = 0;
+			count[i] = 0;
 			Q.push_back(G -> getEdge(i));
 		}
 		while ( Q.size() > 0)
@@ -137,13 +140,18 @@ Wiki dijkstra psudue code
 				int pathLen =  G->pathLength(u,v);
 				int alt = dist[u] + pathLen;
 				
-				std::cout << "Alt:" << alt <<std::endl;
+				//std::cout << "Alt:" << alt <<std::endl;
 				if( G->pathLength(u,v) && alt < dist[v] ){
 						dist[v] = alt;
 						prev[v] = u;
-					}	
+						count[v] = count[u];
+				}else if( alt == dist[v]){
+					count[v] += count[u];
+				}
 			}
 		}
+		std::cout << "here" << std::endl;
+		printSolution(count,rows);
 		printSolution(dist, rows);
 	}//method
 	
@@ -153,6 +161,7 @@ Wiki dijkstra psudue code
 	
 		int i , u;
 		int dist[rows];
+		int countList[rows];
 		bool spt[rows];
 		
 		//INI
@@ -160,9 +169,10 @@ Wiki dijkstra psudue code
 		{
 			dist[i] = std::numeric_limits<int>::max();;
 			spt[i] = false; //allows us to mark visted 
+			countList[i]=0;
 		}
 		dist[source]=0; //dist from source will always be zero;
-		
+		countList[source]=1;
 		for( int count = 0; count < rows; count++ )
 		{
 			u = minDistance(dist, spt, rows);
@@ -172,10 +182,17 @@ Wiki dijkstra psudue code
 				if( !spt[v] && graph[u][v] && dist[u] != std::numeric_limits<int>::max() &&
 					dist[u] + graph[u][v] < dist[v] ){
 						dist[v] = dist[u] + graph[u][v];
-					}	
+						countList[v] = countList[u];
+					}
+					else if(dist[u] + graph[u][v] == dist[v] ){
+						countList[v] += countList[u];
+					}
 			}
 		
 		}
+		    std::cout << "HERE:" <<std::endl;
+			printSolution(countList, rows);
+			std::cout << "________________" <<std::endl;
 			printSolution(dist, rows);
 	}//method
 	
