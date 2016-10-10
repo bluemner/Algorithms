@@ -279,15 +279,16 @@ void merge_buildings(std::vector<std::vector<int>> &X, std::vector<std::vector<i
 			}else{
 				if(X[i][X_R]> Y[j][X_R]){
 					//Case: Domination 
-					//    X Domanates Y
+					//    X Domanates Y 
+					//    Yeilds just X
 					//  ________
 					// |  ____  |
 					// | |xxxx| |
 					//
 					// Becomes:
 					//  ________
-					// |  ____  |
-					// | |xxxx| |
+					// |        |
+					// |        |
 
 					++j; 
 				}else{
@@ -313,8 +314,7 @@ void merge_buildings(std::vector<std::vector<int>> &X, std::vector<std::vector<i
 		++i;
 	}
 	while(j < Y.size())
-	{
-		
+	{		
 		new_x.push_back(Y[j]);
 		++j;
 	}
@@ -354,11 +354,16 @@ void skyline(std::vector<std::vector<int>> &X, std::vector<std::vector<int>> &re
 
 bool sortf (std::vector<int> i,std::vector<int> j) { return (i[0]<j[0]); }
 void skyline_recursion(std::vector<std::vector<int>> &input, std::vector<std::vector<int>> &result ){   
+	
+	//std sort n log n
+	std::sort (input.begin(), input.end(), sortf);
+
 	if(input.size() <2){
 		std::vector<std::vector<int>>  split_lo;
 		merge_buildings(input,split_lo , result );
 		return;
 	}
+
 	std::size_t const half_size = input.size() / 2;
 	std::vector<std::vector<int>>  split_lo(input.begin(), input.begin() + half_size);
 	std::vector<std::vector<int>>  split_hi(input.begin() + half_size, input.end());
@@ -369,13 +374,10 @@ void skyline_recursion(std::vector<std::vector<int>> &input, std::vector<std::ve
 	
 	skyline_recursion(split_lo,result_lo);	
 	skyline_recursion(split_hi,result_hi);	
+   
     result.clear();
 	merge_buildings(result_lo,result_hi, result );
-	std::cout<<"_________________" <<std::endl;
 	std::sort (result.begin(), result.end(), sortf);
-	print_result(result);
-	std::cout<<"_________________" <<std::endl;
-
 }
 void print_result(std::vector<std::vector<int>> &result)	
 {
