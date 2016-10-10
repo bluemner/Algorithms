@@ -4,7 +4,8 @@ FLAGS =-w -ggdb -std=c++11
 OUTPUT_FILE = bin/run.o
 OUTPUT_DIR = bin/
 SOURCE_DIR = source/
-all:dijkstra h1 h2 maxSizeSqaureSubMartrix matrixChain smallestSubsetSumGraterThanTreshold smallestSumNearThreshold thread beta  maxSum smallestSumNearThreshold a 
+
+all:huffman h1 h2 maxSizeSqaureSubMartrix matrixChain smallestSubsetSumGraterThanTreshold smallestSumNearThreshold thread beta dijkstra maxSum smallestSumNearThreshold a 
 	
 a: $(SOURCE_FILES)
 	$(COMPILER) $(FLAGS) $(SOURCE_FILES) -o $(OUTPUT_FILE)
@@ -30,3 +31,5 @@ h1: $(SOURCE_DIR)h1.cpp
 	$(COMPILER) $(FLAGS) $(SOURCE_DIR)h1.cpp -o $(OUTPUT_DIR)h1.o
 h2: $(SOURCE_DIR)h2.cpp 
 	$(COMPILER) $(FLAGS) $(SOURCE_DIR)h2.cpp -o $(OUTPUT_DIR)h2.o
+huffman: $(SOURCE_DIR)huffman.cpp 
+	$(COMPILER) $(FLAGS) $(SOURCE_DIR)huffman.cpp -o $(OUTPUT_DIR)huffman.o

@@ -7,6 +7,12 @@
 			"request": "launch",
 			"target": "./bin/dijkstra.o",
 			"cwd": "${workspaceRoot}"
+		},	{
+			"name": "Huffman",
+			"type": "gdb",
+			"request": "launch",
+			"target": "./bin/huffman.o",
+			"cwd": "${workspaceRoot}"
 		},
 	    {
 			"name": "hw1",
