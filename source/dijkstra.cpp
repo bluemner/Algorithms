@@ -150,11 +150,11 @@ Wiki dijkstra psudue code
     template <size_t rows, size_t cols>  
 	void dijkstra::runAlogrithm ( int (&graph) [rows][cols], int source )
 	{
-	
+
 		int i , u;
 		int dist[rows];
 		bool spt[rows];
-		
+
 		//INI
 		for (i = 0; i < rows; i++)
 		{
@@ -162,38 +162,38 @@ Wiki dijkstra psudue code
 			spt[i] = false; //allows us to mark visted 
 		}
 		dist[source]=0; //dist from source will always be zero;
-		
+
 		for( int count = 0; count < rows; count++ )
 		{
 			u = minDistance(dist, spt, rows);
 			spt[u] = true; //we visted the path;
-			
+
 			for ( int v = 0; v < rows ; v++ ){
 				if( !spt[v] && graph[u][v] && dist[u] != std::numeric_limits<int>::max() &&
 					dist[u] + graph[u][v] < dist[v] ){
 						dist[v] = dist[u] + graph[u][v];
-					}	
+					}
 			}
-		
+
 		}
 			printSolution(dist, rows);
 	}//method
-	
-	template <size_t rows, size_t cols>  
+
+	template <size_t rows, size_t cols>
 	void dijkstra::runAlogrithm ( int (&graph) [rows][cols], int source, int target)
 	{
-	
+
 		int i, j, u;
 		int dist[rows];
 		int prev[rows];
-		bool spt[rows];		
+		bool spt[rows];
 		//bool shrtpath[rows][cols];
 		int parent[rows];
 		//INI
 		for (i = 0; i < rows; i++)
 		{
 			dist[i] = std::numeric_limits<int>::max();
-			spt[i] = false; //allows us to mark visted 
+			spt[i] = false; //allows us to mark visted
 			prev[i] = 0;
 			parent[i] = 0;
 		//	for( j = 0 ; j< cols; j++ ){
@@ -201,20 +201,20 @@ Wiki dijkstra psudue code
 		//	}
 		}
 		dist[source]=0; //dist from source will always be zero;
-		
+
 		for( int count = 0; count < rows; count++ )
 		{
 			u = minDistance(dist, spt, rows);
 			spt[u] = true; //we visted the path;
 		    if(u ==target){
-				
+
 				//1  S ← empty sequence
 				//2  u ← target
 				//3  while prev[u] is defined:                  // Construct the shortest path with a stack S
 				//4      insert u at the beginning of S         // Push the vertex onto the stack
 				//5      u ← prev[u]                            // Traverse from target to source
 				//6  insert u at the beginning of S             // Push the source onto the stack
-	
+
 			  //printSolution(dist, rows);
 			  //printArray(shrtpath);
 			  int parentIndex=0;
@@ -223,37 +223,37 @@ Wiki dijkstra psudue code
 				   u = prev[u];
 			  }
 			  parent[parentIndex]=u;
-			 
+
 			  std::cout << "Shortest path to " << target  <<" Length:"<< dist[target] << std::endl; 
 			  std::cout << 0;
 			  for(int x = parentIndex; x >=0; x--){
 				  std::cout << " -> " << parent[x] ;
-			  } 
+			  }
 			  std::cout <<std::endl;
 			  return;
 			}
-			
-			//distance vertex 
+
+			//distance vertex
 			for ( int v = 0; v < rows ; v++ ){
 				if( !spt[v] && graph[u][v] && dist[u] != std::numeric_limits<int>::max() &&
 					dist[u] + graph[u][v] < dist[v] ){
 						dist[v] = dist[u] + graph[u][v];
 						prev[v] =u;
 						//parent[v] = 1;
-					}			
+					}
 			}
-		
+
 		}
 			printSolution(dist, rows);
 	}//method
-	
+
 }//namespace
 
 //
 int main ( int argc, char ** argv )
 {
-	betacore::graph G;	
-	
+	betacore::graph G;
+
 	G.addNode(0, "A");
 	G.addNode(1, "B");
 	G.addNode(2, "C");
@@ -263,7 +263,7 @@ int main ( int argc, char ** argv )
 	G.addNode(6, "G");
 	G.addNode(7, "H");
 	G.addNode(8, "I");
-	
+
 	// A -> B : 04
 	G.addEdge(0,1,4);
 	// A -> H : 08
@@ -292,17 +292,17 @@ int main ( int argc, char ** argv )
 	G.addEdge(6,7,1);
 	// H -> I : 7
 	G.addEdge(7,8,7);
-	
-	
+
+
 	G.printNodes();
 	G.printEdges();
-	
+
 	//G.runAlogrithm(G,G.getNode(0));
 	betacore::dijkstra  d;
 	betacore::node* source = G.getNode(0);
 	std::cout << "Running List Graph" <<std::endl;
 	d.runAlogrithm(&G, source);
-	
+
 	std::cout << "Running Matrix Graph" <<std::endl;
 	int gg[9][9] = {
 		            {0, 4, 0, 0, 0, 0, 0, 8, 0},
@@ -319,6 +319,6 @@ int main ( int argc, char ** argv )
 	d.runAlogrithm(gg, 0);
 	for(int i=0; i< 9; i++){
 			d.runAlogrithm(gg, 0, i);
-	}				
+	}
 
 }//main
