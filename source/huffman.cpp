@@ -119,5 +119,8 @@ int main(int argc, std::string argv[]){
 
 	betacore::huffman(Table, map);
 	betacore::print_tree(map);
-
+	std::vector<bool> bits;
+	
+	betacore::encode(map,word,bits);
+	
 }
