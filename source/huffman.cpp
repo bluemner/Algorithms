@@ -4,31 +4,40 @@
 #include <string>
 #include <queue>
 #include "../headers/huffman.hpp"
-
+#include <bitset>
 namespace betacore{
-	void print_tree(Node *head, std::string path)
+	void tree_to_map(Node *head,std::vector<bool> &shift,std::map<char,std::vector<bool>> &map)
 	{
 		if(!head)
 		   return;
 
 		if(head->word !='~'){
-			std::cout<< head->word << ":" << path<< std::endl;
+			// std::cout<<head->word << "::";
+			// for(int i=0; i<shift.size(); ++i){
+			// 	std::cout << shift.at(i) ;
+			// }
+			// std::cout << std::endl;
+			map[head->word] = shift;		
 		}
-		print_tree(head->left , path+"0");
-		print_tree(head->right, path+"1");
+		
+		//if(head->left !=NULL)
+		std::vector<bool> temp = shift;
+		temp.push_back(false);
+	
+		tree_to_map(head->left ,temp, map );
+		//if(head->right !=NULL)
+		temp.clear();
+		temp =shift;
+		temp.push_back(true);
+		tree_to_map(head->right,temp, map );
 	}
 
-	void huffman(std::map<char, double> &Table){
+	void huffman(std::map<char, double> &Table,std::map<char,std::vector<bool>> &map){
 		struct Node *left, *right, *_node;
-
 		std::priority_queue<Node*, std::vector<Node*>, Node_Compare> pq;
-
 		for (std::map<char,double>::iterator it=Table.begin(); it!=Table.end(); ++it){
 			pq.push(new Node(it->first, it->second));
-                       //std::cout  << it->first<< ":"<< it->second <<std::endl;
 		}
-		std::cout << "Size:" << pq.size() <<std::endl;
-
 		while(pq.size() != 1){
 			left = pq.top();
 			pq.pop();
@@ -43,21 +52,39 @@ namespace betacore{
 			pq.push(_node);
 
 		}
-		print_tree(pq.top(), std::string(""));
-
+		std::vector<bool> shift;	
+		tree_to_map(pq.top(), shift, map);
+		
 	}
-
 	bool Node_Compare::operator()(Node* a1, Node* b1){
 			 return( a1->freq > b1->freq);
-		}
-}
+	}
 
+	void print_tree(std::map<char,std::vector<bool>> map){
+			for (std::map<char,std::vector<bool>>::iterator it=map.begin(); it!=map.end(); ++it){	
+				std::cout  << it->first<< ":";				
+				for (bool b : it->second){		
+					 auto c = (b)?'1':'0';
+					 std::cout << c;
+				}
+				std::cout<<std::endl;
+			}
+	}
+	void encode(std::map<char,std::vector<bool>> map, std::string word, std::vector<bool> &result){
+		for(auto c : word){
+			result+=map.at(c);
+		}        
+	}
+
+}//End-NameSpace
 /**
  *
  *
  */
 int main(int argc, std::string argv[]){
+	std::string word="what are the indications for getting a digoxin level?";
 	std::map<char, double> Table;
+
 	Table[' '] = 0.1686;
 	Table['e'] = 0.1031;
 	Table['t'] = 0.0796;
@@ -88,5 +115,12 @@ int main(int argc, std::string argv[]){
 	Table['j'] = 0.0008;
 	Table['z'] = 0.0005;
 
-	betacore::huffman(Table);
+	std::map<char,std::vector<bool>> map;
+
+	betacore::huffman(Table, map);
+	betacore::print_tree(map);
+	std::vector<bool> bits;
+	
+	betacore::encode(map,word,bits);
+	
 }
