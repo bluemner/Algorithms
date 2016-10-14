@@ -12,9 +12,9 @@ namespace betacore {
 			this->freq = freq;
 		}
 	};
- 	void print_tree(Node *head, std::string path);
-	void huffman(std::map<char, double> &Table);
-
+ 	void tree_to_map(Node *head, std::vector<bool> &shift,std::map<char,std::vector<bool>> &map);
+	void huffman(std::map<char, double> &Table, std::map<char,std::vector<bool>> &map);
+	void print_tree(std::map<char,std::vector<bool>> map);
 	class Node_Compare{
 		public: 
 			bool operator()(Node* a1, Node* b1);
