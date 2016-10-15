@@ -137,10 +137,8 @@ int main(int argc, std::string argv[]){
 	std::cout<<"Bluemner HW 2 - Note ASCII IS 8 bits on computer, this will be reflected in calculations" <<std::endl;
 	std::string word="what are the indications for getting a digoxin level?";
 	
-	std::cout<<"EX: ASCII Letter a:: ";
-	betacore::word_to_ASCII("a",bits);		
-	betacore::print_vector(bits);	
-	bits.clear();
+	//INI
+
 
 	// Binary bit stream (easier to see this way)
 	std::vector<bool> bits;
@@ -148,6 +146,12 @@ int main(int argc, std::string argv[]){
 	std::map<char, double> Table ;
 	// Huffman Code 
 	std::map<char,std::vector<bool>> map;
+
+	std::cout<<"EX: ASCII Letter a:: ";
+	betacore::word_to_ASCII("a",bits);		
+	betacore::print_vector(bits);	
+	bits.clear();
+
 	
 	//ASCII WORD
 	betacore::word_to_ASCII(word,bits);

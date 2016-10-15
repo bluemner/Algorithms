@@ -1,6 +1,10 @@
 #ifndef _BETA_CORE_HUFFMAN_CODE_
 #define _BETA_CORE_HUFFMAN_CODE_
 namespace betacore {
+	
+	/**
+	 * Node for huffmant code 
+	 */
 	struct Node{
 		char word;
 		double freq;
@@ -26,11 +30,30 @@ namespace betacore {
 	 * Huffman Algorithm
 	 */
 	void huffman(std::map<char, double> &Table, std::map<char,std::vector<bool>> &map);
+	/**
+	 * Prints the map version of the huffman tree
+	 */
 	void print_tree(std::map<char,std::vector<bool>> map);
+	/**
+	 * Prints vector bool on one line
+	 */
 	void print_vector(std::vector<bool> &vec);
+	/** 
+	 *	Pints the map to table
+	 */
 	void print_map(std::map<char,double> map);
+	/**
+	 * Input: word, result< char , probablity>
+	 * Gets the word count and calcules the probality 
+	 */
 	void word_count(std::string word,std::map<char,double> &result);
+	/**
+	 * Encodes the word using huffman code map.
+	 */
 	void encode(std::map<char,std::vector<bool>> map, std::string word, std::vector<bool> &result);
+	/** 
+	 * Compair class needed for std::priority_queue
+	 */
 	class Node_Compare{
 		public: 
 			bool operator()(Node* a1, Node* b1);
