@@ -29,6 +29,9 @@
 
 # Folder
 bin/
-.browse.VC.db
-.browse.VC.db-shm
-.browse.VC.db-wal
+*.browse.VC.db
+*.browse.VC.db-shm
+*.browse.VC.db-wal
+*.db
+*.db-shm
+*.db-wal
