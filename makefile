@@ -5,13 +5,15 @@ OUTPUT_FILE = bin/run.o
 OUTPUT_DIR = bin/
 SOURCE_DIR = source/
 
-all:huffman h1 h2 maxSizeSqaureSubMartrix matrixChain smallestSubsetSumGraterThanTreshold smallestSumNearThreshold thread beta dijkstra maxSum smallestSumNearThreshold a 
+all: dict huffman h1 h2 maxSizeSqaureSubMartrix matrixChain smallestSubsetSumGraterThanTreshold smallestSumNearThreshold thread beta dijkstra maxSum smallestSumNearThreshold a  
 	
+dict: $(SOURCE_DIR)dictionary.cpp
+	$(COMPILER) $(FLAGS) $(SOURCE_DIR)dictionary.cpp -o $(OUTPUT_DIR)dictionary.o
 a: $(SOURCE_FILES)
 	$(COMPILER) $(FLAGS) $(SOURCE_FILES) -o $(OUTPUT_FILE)
 thread: test1.cpp
 	$(COMPILER) $(FLAGS) -pthread test1.cpp -o $(OUTPUT_DIR)test1.o
-beta: $(SOURCE_DIR)beta.cpp headers/beta.h
+beta: $(SOURCE_DIR)beta.cpp heade)rs/beta.h
 	$(COMPILER) $(FLAGS) $(SOURCE_DIR)beta.cpp -o $(OUTPUT_DIR)beta.o
 dijkstra: $(SOURCE_DIR)dijkstra.cpp $(SOURCE_DIR)graph.cpp
 	$(COMPILER) $(FLAGS) $(SOURCE_DIR)graph.cpp $(SOURCE_DIR)dijkstra.cpp -o $(OUTPUT_DIR)dijkstra.o

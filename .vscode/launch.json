@@ -2,6 +2,14 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
+			"name": "dictionary",
+			"type": "gdb",
+			"request": "launch",
+			"target": "./bin/dictionary.o",
+			"arguments": "${workspaceRoot}",
+			"cwd": "${workspaceRoot}"
+		},
+		{
 			"name": "Dijkstra",
 			"type": "gdb",
 			"request": "launch",
