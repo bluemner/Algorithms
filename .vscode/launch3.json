@@ -2,59 +2,40 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "C++ Launch (GDB)",
+			"name": "C++ Launch",
 			"type": "cppdbg",
 			"request": "launch",
-			"launchOptionType": "Local",
-			"miDebuggerPath": "/usr/bin/gdb",
-			"targetArchitecture": "x64",
+			"program": "${workspaceRoot}/bin/h1.o",
+			"args": [],
+			"stopAtEntry": false,
+			"cwd": "${workspaceRoot}",
+			"environment": [],
+			"externalConsole": true,
+			"linux": {
+				"MIMode": "gdb"
+			},
+			"osx": {
+				"MIMode": "lldb"
+			},
+			"windows": {
+				"MIMode": "gdb"
+			}
+		},
+		{
+			"name": "C++ Attach",
+			"type": "cppdbg",
+			"request": "attach",
 			"program": "enter program name, for example ${workspaceRoot}/a.out",
-			"args": [],
-			"stopAtEntry": false,
-			"cwd": "${workspaceRoot}",
-			"environment": []
-		},
-		{
-			"name": "C++ Attach (GDB)",
-			"type": "cppdbg",
-			"request": "launch",
-			"launchOptionType": "Local",
-			"miDebuggerPath": "/usr/bin/gdb",
-			"targetArchitecture": "x64",
-			"program": "enter program name, for example ${workspaceRoot}/a.out",
-			"args": [],
-			"stopAtEntry": false,
-			"cwd": "${workspaceRoot}",
-			"environment": [],
-			"processId": "enter program's process ID"
-		},
-		{
-			"name": "Dijkstra",
-			"type": "cppdbg",
-			"request": "launch",
-			"launchOptionType": "Local",
-			"miDebuggerPath": "/usr/bin/gdb",
-			"targetArchitecture": "x64",
-			"program": "${workspaceRoot}/bin/dijkstra.o",
-			"args": [],
-			"stopAtEntry": false,
-			"cwd": "${workspaceRoot}",
-			"environment": [],
-			"processId": 12345
-		},
-		{
-			"name": "maxSizeSqaureSubMartrix",
-			"type": "cppdbg",
-			"request": "launch",
-			"launchOptionType": "Local",
-			"miDebuggerPath": "/usr/bin/gdb",
-			"targetArchitecture": "x64",
-			"program": "${workspaceRoot}/bin/maxSizeSqaureSubMartrix.o",
-			"args": [],
-			"stopAtEntry": false,
-			"cwd": "${workspaceRoot}",
-			"environment": [],
-			"processId": 12345
+			"processId": "${command.pickProcess}",
+			"linux": {
+				"MIMode": "gdb"
+			},
+			"osx": {
+				"MIMode": "lldb"
+			},
+			"windows": {
+				"MIMode": "gdb"
+			}
 		}
 	]
 }

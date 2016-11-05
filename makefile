@@ -5,7 +5,7 @@ OUTPUT_FILE = bin/run.o
 OUTPUT_DIR = bin/
 SOURCE_DIR = source/
 
-all: dict huffman h1 h2 maxSizeSqaureSubMartrix matrixChain smallestSubsetSumGraterThanTreshold smallestSumNearThreshold thread beta dijkstra maxSum smallestSumNearThreshold a  
+all: matrixSub dict huffman h1 h2 maxSizeSqaureSubMartrix matrixChain smallestSubsetSumGraterThanTreshold smallestSumNearThreshold thread beta dijkstra maxSum smallestSumNearThreshold a  
 	
 dict: $(SOURCE_DIR)dictionary.cpp
 	$(COMPILER) $(FLAGS) $(SOURCE_DIR)dictionary.cpp -o $(OUTPUT_DIR)dictionary.o
@@ -27,6 +27,8 @@ smallestSubsetSumGraterThanTreshold: $(SOURCE_DIR)smallestSubsetSumGraterThanTre
 	$(COMPILER) $(FLAGS) $(SOURCE_DIR)smallestSubsetSumGraterThanTreshold.cpp -o $(OUTPUT_DIR)smallestSubsetSumGraterThanTreshold.o
 matrixChain: $(SOURCE_DIR)matrixChain.cpp
 	$(COMPILER) $(FLAGS) $(SOURCE_DIR)matrixChain.cpp -o $(OUTPUT_DIR)matrixChain.o
+matrixSub: $(SOURCE_DIR)matrixSub.cpp
+	$(COMPILER) $(FLAGS) $(SOURCE_DIR)matrixSub.cpp -o $(OUTPUT_DIR)matrixSub.o
 maxSizeSqaureSubMartrix: $(SOURCE_DIR)maxSizeSqaureSubMartrix.cpp
 	$(COMPILER) $(FLAGS) $(SOURCE_DIR)maxSizeSqaureSubMartrix.cpp -o $(OUTPUT_DIR)maxSizeSqaureSubMartrix.o
 h1: $(SOURCE_DIR)h1.cpp 

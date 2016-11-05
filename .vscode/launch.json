@@ -1,6 +1,14 @@
 {
 	"version": "0.2.0",
 	"configurations": [
+			{
+			"name": "matrixSub",
+			"type": "gdb",
+			"request": "launch",
+			"target": "./bin/matrixSub.o",
+			"arguments": "${workspaceRoot}",
+			"cwd": "${workspaceRoot}"
+		},
 		{
 			"name": "dictionary",
 			"type": "gdb",
