@@ -5,7 +5,7 @@ OUTPUT_FILE = bin/run.o
 OUTPUT_DIR = bin/
 SOURCE_DIR = source/
 
-all: matrixSub dict huffman h1 h2 maxSizeSqaureSubMartrix matrixChain smallestSubsetSumGraterThanTreshold smallestSumNearThreshold thread beta dijkstra maxSum smallestSumNearThreshold a  
+all: palindrome matrixSub dict huffman h1 h2 maxSizeSqaureSubMartrix matrixChain smallestSubsetSumGraterThanTreshold smallestSumNearThreshold thread beta dijkstra maxSum smallestSumNearThreshold a  
 	
 dict: $(SOURCE_DIR)dictionary.cpp
 	$(COMPILER) $(FLAGS) $(SOURCE_DIR)dictionary.cpp -o $(OUTPUT_DIR)dictionary.o
@@ -37,3 +37,5 @@ h2: $(SOURCE_DIR)h2.cpp
 	$(COMPILER) $(FLAGS) $(SOURCE_DIR)h2.cpp -o $(OUTPUT_DIR)h2.o
 huffman: $(SOURCE_DIR)huffman.cpp 
 	$(COMPILER) $(FLAGS) $(SOURCE_DIR)huffman.cpp -o $(OUTPUT_DIR)huffman.o
+palindrome: $(SOURCE_DIR)palindrome.cpp
+	$(COMPILER) $(FLAGS) $(SOURCE_DIR)palindrome.cpp -o $(OUTPUT_DIR)palindrome.o

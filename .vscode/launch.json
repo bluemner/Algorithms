@@ -1,6 +1,14 @@
 {
 	"version": "0.2.0",
 	"configurations": [
+		{
+			"name": "palindrome",
+			"type": "gdb",
+			"request": "launch",
+			"target": "./bin/palindrome.o",
+			"arguments": "${workspaceRoot}",
+			"cwd": "${workspaceRoot}"
+		},
 			{
 			"name": "matrixSub",
 			"type": "gdb",

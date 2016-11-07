@@ -3,6 +3,8 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <cmath>
+
 #define _a 1
 #define _b 2
 #define _c 3
@@ -34,7 +36,7 @@ void optialParenthesizations(char **matrix, int rows, int cols, int i, int j)
 }
 bool matrix_chain_char(std::vector<char> &arr, std::map<char, std::map<char, char>>  &table, char target)
 {
-    int n = arr.size()+1;
+    int n = (int) std::pow(2.0, arr.size() * 1.0 ); // arr.size() + 1 ;
     int i, j, k, x;
 
     // Allocate memory
@@ -45,23 +47,20 @@ bool matrix_chain_char(std::vector<char> &arr, std::map<char, std::map<char, cha
     {
 		m[i] = new char[n];
 		s[i] = new char[n];
+		if( i > 0 )
+		{
+			m[i][0] = arr[i-1];
+			m[0][i] = arr[i-1];
+		}
 	
     }
-
-	for ( i = 0; i < 1; ++i)
-	{
-		for( j = 0; j<1 ; ++j ){
-			if(j=0)continue;
-				m[i][j] = arr[i-1];
-				m[i][j] = arr[i-1];
-		}
-	}
-	 
 	
-    for ( i = 1; i < n; ++i)
+    for ( i = 1 ; i < n; ++i )
     {
-		for( j = 1; j<n ; ++j ){
-			m[i][j]= table [m[i][j-1]] [arr[j-1]];
+		for( j = 1; j < n ; ++j )
+		{
+			
+			m[i][j] = table [m[i][j-1]] [m[0][j]];
 		}
 	}
 
@@ -103,7 +102,8 @@ int main(int argc, char *argv[])
 	// {
 	//     {b, b, a}
 	//     {c, b, a},
-	//     {a, c, c}};
+	//     {a, c, c}
+	// };
 	
 	std::vector<char> dem = {'a','b','c'};
 	betacore::matrix_chain_char(dem, M, 'b');
