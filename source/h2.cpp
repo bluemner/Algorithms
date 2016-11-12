@@ -234,11 +234,8 @@ void merge_vectors(std::vector<std::vector<int>> &X, std::vector<int> &V, std::v
 					x[X_L]=X[i][X_L];
 					x[X_R]=X[i][X_R];
 					x[X_H]=X[i][X_H];		
-			
-							
-				new_x.push_back(std::vector<int>(x, x + sizeof x / sizeof x[0]));
-				
-			
+									
+				new_x.push_back(std::vector<int>(x, x + sizeof x / sizeof x[0]));			
 			}
 		//	--i;
 

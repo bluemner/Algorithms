@@ -138,7 +138,7 @@ void printArray(int **matrix, int rows, int cols)
 		// input.substr(s, s + mx - 1 )
 		std::string str;
 		int mx = m[1][n-1];
-		std::cout << "Longest palindrome substring is: "<< mx<< "\t" << str << std::endl;
+		std::cout << "Longest palindrome mod substring is: "<< mx<< "\t" << str << std::endl;
 		
 		delete[] m;
 		return mx;

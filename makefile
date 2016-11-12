@@ -5,10 +5,12 @@ OUTPUT_FILE = bin/run.o
 OUTPUT_DIR = bin/
 SOURCE_DIR = source/
 
-all: palindrome matrixSub dict huffman h1 h2 maxSizeSqaureSubMartrix matrixChain smallestSubsetSumGraterThanTreshold smallestSumNearThreshold thread beta dijkstra maxSum smallestSumNearThreshold a  
+all: cloth palindrome matrixSub dict huffman h1 h2 maxSizeSqaureSubMartrix matrixChain smallestSubsetSumGraterThanTreshold smallestSumNearThreshold thread beta dijkstra maxSum smallestSumNearThreshold a  
 	
 dict: $(SOURCE_DIR)dictionary.cpp
 	$(COMPILER) $(FLAGS) $(SOURCE_DIR)dictionary.cpp -o $(OUTPUT_DIR)dictionary.o
+cloth: $(SOURCE_DIR)cloth.cpp
+	$(COMPILER) $(FLAGS) $(SOURCE_DIR)cloth.cpp -o $(OUTPUT_DIR)cloth.o
 a: $(SOURCE_FILES)
 	$(COMPILER) $(FLAGS) $(SOURCE_FILES) -o $(OUTPUT_FILE)
 thread: test1.cpp

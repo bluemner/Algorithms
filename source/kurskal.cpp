@@ -15,7 +15,7 @@ struct subset {
 
 betacore::node * find(subset s, int i, betacore::node n)
 {
-	   // find root and make root as parent of i (path compression)
+	// find root and make root as parent of i (path compression)
     if (subsets[i].parent.id != n.id)
         subsets[i].parent = find(subsets, ++i,subsets[i].parent);
 	
