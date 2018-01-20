@@ -1,6 +1,6 @@
 SOURCE_FILES = main.cpp
 COMPILER = g++
-FLAGS =-w -ggdb -std=c++11
+FLAGS =-w -ggdb -std=c++11 -fsanitize=address
 OUTPUT_FILE = bin/run.o
 OUTPUT_DIR = bin/
 SOURCE_DIR = source/
@@ -8,7 +8,7 @@ SOURCE_DIR = source/
 all: cloth palindrome matrixSub dict huffman h1 h2 maxSizeSqaureSubMartrix matrixChain smallestSubsetSumGraterThanTreshold smallestSumNearThreshold thread beta dijkstra maxSum smallestSumNearThreshold a  
 	
 dict: $(SOURCE_DIR)dictionary.cpp
-	$(COMPILER) $(FLAGS) $(SOURCE_DIR)dictionary.cpp -o $(OUTPUT_DIR)dictionary.o
+	$(COMPILER) $(FLAGS) $(SOURCE_DIR)dictiosourcenary.cpp -o $(OUTPUT_DIR)dictionary.o
 cloth: $(SOURCE_DIR)cloth.cpp
 	$(COMPILER) $(FLAGS) $(SOURCE_DIR)cloth.cpp -o $(OUTPUT_DIR)cloth.o
 a: $(SOURCE_FILES)
@@ -41,3 +41,5 @@ huffman: $(SOURCE_DIR)huffman.cpp
 	$(COMPILER) $(FLAGS) $(SOURCE_DIR)huffman.cpp -o $(OUTPUT_DIR)huffman.o
 palindrome: $(SOURCE_DIR)palindrome.cpp
 	$(COMPILER) $(FLAGS) $(SOURCE_DIR)palindrome.cpp -o $(OUTPUT_DIR)palindrome.o
+divisor: $(SOURCE_DIR)divisor.cpp
+	$(COMPILER) $(FLAGS) $(SOURCE_DIR)divisor.cpp -o $(OUTPUT_DIR)divisor.o

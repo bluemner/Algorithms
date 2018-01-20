@@ -2,6 +2,15 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
+			"name": "divisor",
+			"type": "gdb",
+			"request": "launch",
+			"preLaunchTask": "divisor",
+			"target": "./bin/divisor.o",
+			"arguments": "${workspaceRoot}",
+			"cwd": "${workspaceRoot}"
+		},
+		{
 			"name": "palindrome",
 			"type": "gdb",
 			"request": "launch",
@@ -9,7 +18,7 @@
 			"arguments": "${workspaceRoot}",
 			"cwd": "${workspaceRoot}"
 		},
-			{
+		{
 			"name": "matrixSub",
 			"type": "gdb",
 			"request": "launch",
@@ -31,21 +40,22 @@
 			"request": "launch",
 			"target": "./bin/dijkstra.o",
 			"cwd": "${workspaceRoot}"
-		},	{
+		},
+		{
 			"name": "Huffman",
 			"type": "gdb",
 			"request": "launch",
 			"target": "./bin/huffman.o",
 			"cwd": "${workspaceRoot}"
 		},
-	    {
+		{
 			"name": "hw1",
 			"type": "gdb",
 			"request": "launch",
 			"target": "./bin/h1.o",
 			"cwd": "${workspaceRoot}"
 		},
-		    {
+		{
 			"name": "hw2",
 			"type": "gdb",
 			"request": "launch",
@@ -101,7 +111,5 @@
 			"target": "./bin/maxSizeSqaureSubMartrix.o",
 			"cwd": "${workspaceRoot}"
 		}
-		
-		
 	]
 }
